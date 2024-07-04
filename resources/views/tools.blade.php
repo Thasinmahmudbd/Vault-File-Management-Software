@@ -65,7 +65,7 @@
                                 <a class="exSubLink_2" href="#">extra sub 2</a>
                             </div>
                         </a>-->
-                        <a class="subLink_2" href="#">Dashboard</a>
+                        <a class="subLink_2" href="/dashboard">Dashboard</a>
                         <a class="subLink_2" href="#">Refresh</a>
                         <a class="subLink_2" href="#">Meet Dev</a>
                     </div>    

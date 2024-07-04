@@ -72,7 +72,7 @@
                         <a class="subLink_2" href="#" onclick="fileFolderAdderOpen()">Add Folder</a>
                         <a class="subLink_2" href="#">Refresh</a>
                         <a class="subLink_2" href="#">Meet Dev</a>
-                        <a class="subLink_2" href="#">Tools</a>
+                        <a class="subLink_2" href="/tools">Tools</a>
                     </div>    
                 </a>
             </div>
