@@ -1,0 +1,289 @@
+.searchBtn{
+    background-color: #fff;
+    transition: 200ms ease-in-out;
+}
+
+.searchBtn:hover{
+    background-color: rgb(26, 24, 24);
+    color: #fff;
+    transition: 200ms ease-in-out;
+}
+
+.folderContainer{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    transition: 200ms ease-in-out;
+}
+
+.folderContainerList{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    transition: 200ms ease-in-out;
+}
+
+.folderPack{
+    position: relative;
+}
+
+.option_menu{
+    display: none;
+    grid-template-columns: 20px 1fr;
+    width: 120px;
+    font-size: .7rem;
+    position: absolute;
+    z-index: 5;
+    padding: 0px;
+    background-color: #eee;
+    box-shadow: 1px 1px 5px 0px #999;
+    border: 3px solid #eee;
+    border-radius: 3px;
+    transition: 200ms ease-in-out;
+}
+
+/*.close .folderPack .option_menu{
+    display: none;
+    transition: 200ms ease-in-out;
+}*/
+
+.option_menu a, .option_menu i{
+    padding: 5px;
+    background-color: #eee;
+    border-bottom: 1px solid #ddd;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.option_menu a:hover{
+    background-color: rgba(255, 217, 0, 0.616);
+}
+
+.folderContainer .folder{
+    display: grid;
+    grid-template-columns: 70px;
+    text-align: center;
+    font-size: .8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: #000;
+}
+
+.folderContainer .folder .folderName{
+    text-overflow: ellipsis; 
+    white-space: nowrap;
+    overflow: hidden;
+    max-height: 40px;
+    max-width: 70px;
+}
+
+.folderContainer .folder i{
+    font-size: 40px;
+    text-align: center;
+    color:rgb(71, 123, 161);
+}
+
+.folderContainer .folder .fa-folder{color: gold;}
+.folderContainer .folder .fa-file-word{color: rgb(0, 166, 255);}
+.folderContainer .folder .fa-file-powerpoint{color: rgb(255, 128, 0);}
+.folderContainer .folder .fa-file-pdf{color: rgb(0, 166, 255);}
+.folderContainer .folder .fa-file-excel{color: rgb(17, 165, 27);}
+.folderContainer .folder .fa-image{color: rgb(78, 150, 196);}
+.folderContainer .folder .fa-code{color: rgb(237, 21, 107);}
+.folderContainer .folder .fa-compact-disc{color: rgb(78, 150, 196);}
+.folderContainer .folder .fa-film{color: rgb(78, 150, 196);}
+.folderContainer .folder .fa-question-circle{color: rgb(106, 108, 110);}
+.folderContainer .folder .fa-archive{color: rgb(46, 167, 146);}
+
+.folderContainerList .folder{
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 0px;
+    font-size: .8rem;
+    font-weight: bold;
+    align-items: center;
+    text-decoration: none;
+    color: #000;
+    border-bottom: 1px dotted gold;
+    padding-bottom: 5px;
+}
+
+.folderContainerList .folder .folderName{
+    text-overflow: unset;
+    white-space: wrap;
+    overflow: auto;
+    max-height: 40px;
+    max-width: max-content;
+}
+
+.folderContainerList .folder i{
+    font-size: 20px;
+    text-align: center;
+    color:rgb(71, 123, 161);
+}
+
+.folderContainerList .folder .fa-folder{color: gold;}
+.folderContainerList .folder .fa-file-word{color: rgb(0, 166, 255);}
+.folderContainerList .folder .fa-file-powerpoint{color: rgb(255, 128, 0);}
+.folderContainerList .folder .fa-file-pdf{color: rgb(0, 166, 255);}
+.folderContainerList .folder .fa-file-excel{color: rgb(17, 165, 27);}
+.folderContainerList .folder .fa-image{color: rgb(78, 150, 196);}
+.folderContainerList .folder .fa-code{color: rgb(237, 21, 107);}
+.folderContainerList .folder .fa-compact-disc{color: rgb(78, 150, 196);}
+.folderContainerList .folder .fa-film{color: rgb(78, 150, 196);}
+.folderContainerList .folder .fa-question-circle{color: rgb(106, 108, 110);}
+.folderContainerList .folder .fa-archive{color: rgb(46, 167, 146);}
+
+.modals_container{
+    display: none;
+    position: absolute;
+    width: 120px;
+    height: 200px;
+    max-height: 400px;
+    z-index: 5;
+    padding: 12px;
+    transition: 200ms ease-in-out;
+}
+
+.modals{
+    display: grid;
+    align-content: baseline;
+    padding: 0px;
+    background-color: #eee;
+    text-align: justify;
+    font-size: .7rem;
+    box-shadow: 1px 1px 5px 0px #999;
+    border: 3px solid #eee;
+    border-radius: 3px;
+}
+
+.modals a , .modals i{
+    padding: 5px;
+    background-color: #eee;
+    border-bottom: 1px solid #ddd;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.modals a:hover{
+    background-color: rgba(255, 217, 0, 0.616);
+}
+
+.rightClick{
+    height: calc(100vh - 20px);
+}
+
+.modalRight{
+    display: grid;
+    grid-template-columns: 20px 1fr;
+}
+
+.dualBtn{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.LightMode{
+    background-color: #fff;
+    color: #000;
+}
+
+.DarkMode{
+    background-color: #222000;
+    color: #fff;
+}
+
+.DarkMode .folderContainerList a{
+    background-color: #222000;
+    color: #fff;
+}
+
+.DarkMode .folderContainer a{
+    background-color: #222000;
+    color: #fff;
+}
+
+.folderPack{
+    cursor: pointer;
+}
+
+.mobnav_container{
+    position: absolute;
+    top: -1000px;
+    left: 0px;
+    padding: 20px;
+    background-color: #ffffffda;
+    width: 100%;
+    height: max-content;
+    box-shadow: 1px 1px 5px 0px #999;
+    z-index: 6;
+    transition: 500ms ease-in-out;
+}
+
+.mobnav{
+    display: grid;
+    width: 200px;
+    align-items: center;
+    margin: auto;
+    gap: 5px;
+}
+
+.mobnav a{
+    color: #000;
+    text-decoration: none;
+    font-size: 12px;
+    padding: 5px;
+}
+
+.mobnav i{
+    color: #000;
+    text-decoration: none;
+    font-size: 12px;
+    padding: 5px;
+}
+
+.mobnav a:hover{
+    background-color: rgba(255, 217, 0, 0.575);
+}
+
+.formBox{
+    display: grid;
+    gap: 5px;
+    grid-template-columns: 120px 1fr;
+    align-items: center;
+}
+
+select{
+    width: 200px;
+}
+
+/*Drop file to upload*/
+.drop-container {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.file-input {
+    display: none;
+}
+
+.drop-label {
+    font-size: 12px;
+    font-weight: bold;
+    color: #888;
+    margin-top: 15px;
+}
+
+.file-list {
+    max-height: 43px;
+    overflow-y: scroll;
+}
+
+.file-item {
+    margin-bottom: 8px;
+}
