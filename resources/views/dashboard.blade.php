@@ -78,7 +78,7 @@
             </div>
 
             <div class="mainLink_2">
-                <a href="#" class="nunitoBold">Logout</a>
+                <a href="{{ url('/logout') }}" class="nunitoBold">Logout</a>
             </div>
 
         </div>
@@ -347,7 +347,7 @@
                 <a href="#" onclick="closeMenu()">Close Menu</a>
 
                 <i class="fa-solid fa-right-from-bracket"></i>
-                <a href="">Logout</a>
+                <a href="{{ url('/logout') }}">Logout</a>
         
             </div>
 

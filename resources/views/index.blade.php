@@ -52,26 +52,29 @@
                 <a href="#" class="titleBtn" onclick="modals_Close()">&times;</a>
             </div>
             <p>Enter your handel & pass code to access your vault. 3 attempts remaining.</p>
-            <form action="">
+            <form action="{{ url('checkCode') }}" method="post">
+            @csrf
                     <div class="frmElm_14">
                 
                         <label  for=""> Handel: </label>
-                        <input  type="email" class="blockSelect" placeholder="Enter a valid email">
+                        <input  type="text" class="blockSelect" placeholder="Enter a valid email" name="handel" value="{{old('handel')}}">
                 
                     </div>
+                    @error('handel') {{$message}} @enderror
 
                     <div class="gap"></div>
 
                     <div class="frmElm_14">
                 
                         <label  for=""> Pass Code: </label>
-                        <input  type="password" class="blockSelect" placeholder="Enter your pass code">
+                        <input  type="password" class="blockSelect" placeholder="Enter your pass code" name="code">
                 
                     </div>
+                    @error('code') {{$message}} @enderror
 
                     <div class="gap"></div>
 
-                    <input class="successBtn w_100Per p_5px" value="Login" type="button">
+                    <input class="successBtn w_100Per p_5px" value="Login" type="submit">
             </form>
             
             <div class="button_tab bgGold modalFooter">
