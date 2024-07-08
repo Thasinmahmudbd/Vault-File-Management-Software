@@ -96,35 +96,41 @@
 
         <div id="view_type" class="m_20px pt_60px folderContainer">
 
+            @foreach($packages as $package)
+
+            @if($package->package_type == 'folder')
+
              <!--Folder template-->
             <div class="folderPack">
                 <a href="#" class="folder">
                     <i class="fas fa-folder"></i>
-                    <span class="folderName">Folder Name</span>
+                    <span class="folderName">{{$package->package_name}}</span>
                 </a>
                 <div class="option_menu">
                     <i class="fas fa-folder-open"></i>
                     <a href="#">Open Folder</a>
                     <i class="fas fa-folder-minus"></i>
-                    <a href="#">Delete Folder</a>
+                    <a href="{{ url('delete/', $package->package_id) }}">Delete Folder</a>
                     <i class="fas fa-lock"></i>
                     <a href="#" onclick="LockFileOpen()">Lock Folder</a>
                     <i class="fas fa-window-close"></i>
                     <a href="#" onclick="close_folder_option()">Close Menu</a>
                 </div>
             </div>
+
+            @elseif($package->package_type == 'word')
             
             <!--Word file template-->
             <div class="folderPack">
                 <a href="#" class="folder">
                     <i class="fas fa-file-word"></i>
-                    <span class="folderName">File Name</span>
+                    <span class="folderName">{{$package->package_name}}</span>
                 </a>
                 <div class="option_menu">
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="#">Delete File</a>
+                    <a href="{{ url('delete/', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -133,18 +139,20 @@
                     <a href="#" onclick="close_folder_option()">Close Menu</a>
                 </div>
             </div>
+
+            @elseif($package->package_type == 'powerpoint')
 
             <!--Powerpoint file template-->
             <div class="folderPack">
                 <a href="#" class="folder">
                     <i class="fas fa-file-powerpoint"></i>
-                    <span class="folderName">File Name</span>
+                    <span class="folderName">{{$package->package_name}}</span>
                 </a>
                 <div class="option_menu">
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="#">Delete File</a>
+                    <a href="{{ url('delete/', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -153,18 +161,20 @@
                     <a href="#" onclick="close_folder_option()">Close Menu</a>
                 </div>
             </div>
+
+            @elseif($package->package_type == 'pdf')
 
             <!--PDF file template-->
             <div class="folderPack">
                 <a href="#" class="folder">
                     <i class="fas fa-file-pdf"></i>
-                    <span class="folderName">File Name</span>
+                    <span class="folderName">{{$package->package_name}}</span>
                 </a>
                 <div class="option_menu">
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="#">Delete File</a>
+                    <a href="{{ url('delete/', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -173,18 +183,20 @@
                     <a href="#" onclick="close_folder_option()">Close Menu</a>
                 </div>
             </div>
+
+            @elseif($package->package_type == 'excel')
 
             <!--Excel file template-->
             <div class="folderPack">
                 <a href="#" class="folder">
                     <i class="fas fa-file-excel"></i>
-                    <span class="folderName">File Name</span>
+                    <span class="folderName">{{$package->package_name}}</span>
                 </a>
                 <div class="option_menu">
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="#">Delete File</a>
+                    <a href="{{ url('delete/', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -193,18 +205,20 @@
                     <a href="#" onclick="close_folder_option()">Close Menu</a>
                 </div>
             </div>
+
+            @elseif($package->package_type == 'code')
 
             <!--Code file template-->
             <div class="folderPack">
                 <a href="#" class="folder">
                     <i class="fas fa-code"></i>
-                    <span class="folderName">File Name</span>
+                    <span class="folderName">{{$package->package_name}}</span>
                 </a>
                 <div class="option_menu">
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="#">Delete File</a>
+                    <a href="{{ url('delete/', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -213,18 +227,20 @@
                     <a href="#" onclick="close_folder_option()">Close Menu</a>
                 </div>
             </div>
+
+            @elseif($package->package_type == 'image')
 
             <!--Image file template-->
             <div class="folderPack">
                 <a href="#" class="folder">
                     <i class="fas fa-image"></i>
-                    <span class="folderName">Image Name</span>
+                    <span class="folderName">{{$package->package_name}}</span>
                 </a>
                 <div class="option_menu">
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="#">Delete File</a>
+                    <a href="{{ url('delete/', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -233,18 +249,20 @@
                     <a href="#" onclick="close_folder_option()">Close Menu</a>
                 </div>
             </div>
+
+            @elseif($package->package_type == 'audio')
 
             <!--Audio file template-->
             <div class="folderPack">
                 <a href="#" class="folder">
                     <i class="fas fa-compact-disc"></i>
-                    <span class="folderName">Audio Name</span>
+                    <span class="folderName">{{$package->package_name}}</span>
                 </a>
                 <div class="option_menu">
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="#">Delete File</a>
+                    <a href="{{ url('delete/', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -253,18 +271,20 @@
                     <a href="#" onclick="close_folder_option()">Close Menu</a>
                 </div>
             </div>
+
+            @elseif($package->package_type == 'video')
 
             <!--Video file template-->
             <div class="folderPack">
                 <a href="#" class="folder">
                     <i class="fas fa-film"></i>
-                    <span class="folderName">Video Name</span>
+                    <span class="folderName">{{$package->package_name}}</span>
                 </a>
                 <div class="option_menu">
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="#">Delete File</a>
+                    <a href="{{ url('delete/', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -274,17 +294,19 @@
                 </div>
             </div>
 
+            @elseif($package->package_type == 'archive')
+
             <!--Archived/Zip file template-->
             <div class="folderPack">
                 <a href="#" class="folder">
                     <i class="fas fa-archive"></i>
-                    <span class="folderName">Archive Name</span>
+                    <span class="folderName">{{$package->package_name}}</span>
                 </a>
                 <div class="option_menu">
                     <i class="fas fa-download"></i>
                     <a href="#">Download Archive</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="#">Delete Archive</a>
+                    <a href="{{ url('delete/', $package->package_id) }}">Delete Archive</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move Archive</a>
                     <i class="fas fa-lock"></i>
@@ -294,17 +316,19 @@
                 </div>
             </div>
 
+            @else
+
             <!--Miscellaneous file template-->
             <div class="folderPack">
                 <a href="#" class="folder">
                     <i class="fas fa-question-circle"></i>
-                    <span class="folderName">File Name</span>
+                    <span class="folderName">{{$package->package_name}}</span>
                 </a>
                 <div class="option_menu">
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="#">Delete File</a>
+                    <a href="{{ url('delete/', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -313,6 +337,13 @@
                     <a href="#" onclick="close_folder_option()">Close Menu</a>
                 </div>
             </div>
+
+            @endif
+
+            @endforeach
+
+            <p>File name: {{Session::get('FILENAME')}}</p>
+            <p>userid: {{Session::get('USERID')}}</p>
 
         </div>
 
@@ -400,17 +431,18 @@
             </div>
 
             <!--Create Folder File Form-->
-            <form action="" class="formBoxContainer">
+            <form action="{{ url('addPackage') }}" method="post" class="formBoxContainer" enctype="multipart/form-data">
+            @csrf
                     
                 <div class="frmElm_10 formBox">                   
-                    <label  for=""> Name </label>
-                    <input  type="text">                    
+                    <label for="name"> Name </label>
+                    <input name="name" type="text" required>                    
                 </div>
 
                 <div class="formBox">
                     <div><b>Open</b></div>
                     <div class="select_1">              
-                        <select name="" id="">
+                        <select name="open_as" id="open_as" required>
                             <option value="folder">Folder</option>
                             <option value="file">File</option>
                         </select>                   
@@ -421,8 +453,9 @@
                 <div class="formBox">
                     <div><b>File Type</b></div>
                     <div class="select_1">              
-                        <select name="" id="">
-                            <option value="">Word/Text</option>
+                        <select name="file_type" id="file_type" required>
+                            <option value="folder">Folder</option>
+                            <option value="word">Word/Text</option>
                             <option value="powerpoint">Powerpoint</option>
                             <option value="excel">Excel</option>
                             <option value="pdf">PDF</option>
@@ -437,13 +470,15 @@
                     </div>
                 </div>
 
-                <div class="drop-container" id="dropContainer">
+                <!--<div class="drop-container" id="dropContainer">
                     <p class="drop-label" id="dropLabel">Drag & drop files here to upload</p>
-                    <input type="file" id="fileInput" class="file-input" multiple>
+                    <input type="file" id="fileInput" name="file_input" class="file-input">
                     <div class="file-list" id="fileList"></div>
-                </div>
+                </div>-->
 
-                <input class="frmBtnR" value="Create" type="button">
+                <input type="file" id="fileInput" name="file_input">
+
+                <input class="frmBtnR" value="Create" type="submit">
 
             </form>
 

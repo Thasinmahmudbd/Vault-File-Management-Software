@@ -17,13 +17,15 @@ class UserControl extends Controller
             'code'=>'required'
         ]);
 
-        $check =DB::table('users')
+        $check = DB::table('users')
             ->where('name',$handel)
             ->where('password',$code)
-            ->get();
+            ->first();
 
-        if(isset($check[0])){
-            $request->session()->put('USERTYPE',$check[0]->remember_token);
+        if(isset($check)){
+            $request->session()->put('USERTYPE',$check->remember_token);
+            $request->session()->put('USERID',$check->id);
+            $request->session()->put('CHILDOF','ROOT');
             return redirect('/dashboard');
         }else{
             return redirect('/');
@@ -34,6 +36,8 @@ class UserControl extends Controller
     function logOut(Request $request){
 
         $request->session()->forget('USERTYPE');
+        $request->session()->forget('USERID');
+        $request->session()->forget('CHILDOF');
 
         return redirect('/');    
     }
