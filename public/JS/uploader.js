@@ -1,4 +1,4 @@
-/* Drag and drop file to upload */
+/* Drag and drop file to upload [Irrelevent]*/ 
 // JavaScript (script.js)
 const dropContainer = document.getElementById('dropContainer');
 const dropLabel = document.getElementById('dropLabel');
@@ -48,7 +48,21 @@ function handleFiles(files) {
     }
 }
 
+/* Getting file in one input field by putting it in another input field [Irrelevent]*/
 
+// Get references to the file input elements
+const fileInput2 = document.getElementById('fileInput2');
+
+// Add event listener to fileInput1 for when file is selected
+fileInput.addEventListener('change', function() {
+    if (fileInput.files.length > 0) {
+        // Set the same file to fileInput2
+        fileInput2.files = fileInput.files;
+    } else {
+        // Clear fileInput2 if no file selected in fileInput1
+        fileInput2.value = '';
+    }
+});
 
 
 

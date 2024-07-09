@@ -18,18 +18,28 @@ Route::controller(UserControl::class)->group(function(){
 
     Route::get('/logout','logOut');
 
-    Route::get('/delete/{id}','/');
-
 });
 
 // Dashboard
 Route::controller(LocationControl::class)->group(function(){
 
-    //Show dashboard data.
+    //get dashboard data when root.
     Route::get('/dashboard','index');
 
     //post from dashboard.
     Route::post('/addPackage','create');
+
+    //delete from dashboard.
+    Route::get('/delete/{id}','destroy');
+
+    //get dashboard data.
+    Route::get('/dashboard/{id}','indexChild');
+
+    //go to dashboard.
+    Route::get('/dash','dash');
+
+    //go back to prev node.
+    Route::get('/go/back','goBack');
 
 });
 

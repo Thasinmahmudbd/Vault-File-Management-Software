@@ -51,6 +51,10 @@
         <div class="mainLinks_2">
 
             <div class="mainLink_2">
+                <a href="{{ url('/go/back') }}" class="nunitoBold">Go Back</a>
+            </div>
+
+            <div class="mainLink_2">
                 <a href="#"><i class="fas fa-eye"></i>
                     <div class="subLinks_2">
                         <a class="subLink_2" href="#" onclick="grid_view()"><abbr title="View as grid"><i class="fas fa-th-large"></i></abbr></a>
@@ -108,9 +112,9 @@
                 </a>
                 <div class="option_menu">
                     <i class="fas fa-folder-open"></i>
-                    <a href="#">Open Folder</a>
+                    <a href="{{ url('/dashboard', $package->package_id) }}">Open Folder</a>
                     <i class="fas fa-folder-minus"></i>
-                    <a href="{{ url('delete/', $package->package_id) }}">Delete Folder</a>
+                    <a href="{{ url('delete', $package->package_id) }}">Delete Folder</a>
                     <i class="fas fa-lock"></i>
                     <a href="#" onclick="LockFileOpen()">Lock Folder</a>
                     <i class="fas fa-window-close"></i>
@@ -130,7 +134,7 @@
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="{{ url('delete/', $package->package_id) }}">Delete File</a>
+                    <a href="{{ url('delete', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -152,7 +156,7 @@
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="{{ url('delete/', $package->package_id) }}">Delete File</a>
+                    <a href="{{ url('delete', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -174,7 +178,7 @@
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="{{ url('delete/', $package->package_id) }}">Delete File</a>
+                    <a href="{{ url('delete', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -196,7 +200,7 @@
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="{{ url('delete/', $package->package_id) }}">Delete File</a>
+                    <a href="{{ url('delete', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -218,7 +222,7 @@
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="{{ url('delete/', $package->package_id) }}">Delete File</a>
+                    <a href="{{ url('delete', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -240,7 +244,7 @@
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="{{ url('delete/', $package->package_id) }}">Delete File</a>
+                    <a href="{{ url('delete', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -262,7 +266,7 @@
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="{{ url('delete/', $package->package_id) }}">Delete File</a>
+                    <a href="{{ url('delete', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -284,7 +288,7 @@
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="{{ url('delete/', $package->package_id) }}">Delete File</a>
+                    <a href="{{ url('delete', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -306,7 +310,7 @@
                     <i class="fas fa-download"></i>
                     <a href="#">Download Archive</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="{{ url('delete/', $package->package_id) }}">Delete Archive</a>
+                    <a href="{{ url('delete', $package->package_id) }}">Delete Archive</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move Archive</a>
                     <i class="fas fa-lock"></i>
@@ -328,7 +332,7 @@
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="{{ url('delete/', $package->package_id) }}">Delete File</a>
+                    <a href="{{ url('delete', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -342,8 +346,10 @@
 
             @endforeach
 
-            <p>File name: {{Session::get('FILENAME')}}</p>
-            <p>userid: {{Session::get('USERID')}}</p>
+            <p>file name: {{Session::get('FILENAME')}}</p>
+            <p>user id: {{Session::get('USERID')}}</p>
+            <p>file add: {{Session::get('FILEADD')}}</p>
+            <p>child of: {{Session::get('CHILDOF')}}</p>
 
         </div>
 
@@ -470,13 +476,11 @@
                     </div>
                 </div>
 
-                <!--<div class="drop-container" id="dropContainer">
-                    <p class="drop-label" id="dropLabel">Drag & drop files here to upload</p>
-                    <input type="file" id="fileInput" name="file_input" class="file-input">
-                    <div class="file-list" id="fileList"></div>
-                </div>-->
-
-                <input type="file" id="fileInput" name="file_input">
+                <div class="drop-container" id="dropContainer">
+                    <!--<p class="drop-label" id="dropLabel">Drag & drop files here to upload</p>-->
+                    <input type="file" id="fileInput" name="file_input" class="">
+                    <!--<div class="file-list" id="fileList"></div>-->
+                </div>
 
                 <input class="frmBtnR" value="Create" type="submit">
 

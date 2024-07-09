@@ -5,13 +5,58 @@ namespace App\Http\Controllers;
 use App\Models\location;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class LocationControl extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Set node to root.
      */
     public function index(Request $request)
+    {
+        //changing child of
+        $request->session()->put('CHILDOF','ROOT');
+        return redirect('/dash');
+    }
+
+    /**
+     * Set node to child.
+     */
+    public function indexChild(Request $request, $id)
+    {
+        //changing child of
+        $request->session()->put('CHILDOF',$id);
+        return redirect('/dash');
+    }
+
+    /**
+     * Go back to previous node.
+     */
+    public function goBack(Request $request)
+    {
+        $CHILDOF = $request->session()->get('CHILDOF');
+        $USERID = $request->session()->get('USERID');
+
+        if($CHILDOF == 'ROOT'){
+            $id = $CHILDOF;
+        }else{
+            $node = location::query()
+            ->where('package_id',$CHILDOF)
+            ->where('user_id',$USERID)
+            ->first();
+
+            $id = $node->child_of;
+        }
+        
+        //changing child of
+        $request->session()->put('CHILDOF',$id);
+        return redirect('/dash');
+    }
+
+     /**
+     * Display resource in dashboard.
+     */
+    public function dash(Request $request)
     {
         //Geting all packages based no location.
         $USERTYPE = $request->session()->get('USERTYPE');
@@ -25,6 +70,7 @@ class LocationControl extends Controller
             ->get();
 
         return view('dashboard', ['packages'=> $packages]);
+        
     }
 
     /**
@@ -60,38 +106,39 @@ class LocationControl extends Controller
         if($request->hasfile('file_input')){
 
             $file=$request->file('file_input');
-            $file_name=$package_name.$rand;
+            $ext=$file->extension();
+            $file_name=$package_name.$rand.'.'.$ext;
 
-            if($package_type = 'word'){
+            if($package_type == 'word'){
                 //$file->storeAs('/public/packages/word',$file);
-                $file->move(public_path('/word'), $file_name); // to public
-            }elseif($package_type = 'powerpoint'){
+                $file->move(public_path('/Files/Word'), $file_name); // to public
+            }elseif($package_type == 'powerpoint'){
                 //$file->storeAs('/public/packages/powerpoint',$file);
-                $file->move(public_path('/powerpoint'), $file_name); // to public
-            }elseif($package_type = 'excel'){
+                $file->move(public_path('/Files/Powerpoint'), $file_name); // to public
+            }elseif($package_type == 'excel'){
                 //$file->storeAs('/public/packages/excel',$file);
-                $file->move(public_path('/excel'), $file_name); // to public
-            }elseif($package_type = 'pdf'){
+                $file->move(public_path('/Files/Excel'), $file_name); // to public
+            }elseif($package_type == 'pdf'){
                 //$file->storeAs('/public/packages/pdf',$file);
-                $file->move(public_path('/pdf'), $file_name); // to public
-            }elseif($package_type = 'code'){
+                $file->move(public_path('/Files/PDF'), $file_name); // to public
+            }elseif($package_type == 'code'){
                 //$file->storeAs('/public/packages/code',$file);
-                $file->move(public_path('/code'), $file_name); // to public
-            }elseif($package_type = 'image'){
+                $file->move(public_path('/Files/Code'), $file_name); // to public
+            }elseif($package_type == 'image'){
                 //$file->storeAs('/public/packages/image',$file);
-                $file->move(public_path('/image'), $file_name); // to public
-            }elseif($package_type = 'audio'){
+                $file->move(public_path('/Files/Image'), $file_name); // to public
+            }elseif($package_type == 'audio'){
                 //$file->storeAs('/public/packages/audio',$file);
-                $file->move(public_path('/audio'), $file_name); // to public
-            }elseif($package_type = 'video'){
+                $file->move(public_path('/Files/Audio'), $file_name); // to public
+            }elseif($package_type == 'video'){
                 //$file->storeAs('/public/packages/video',$file);
-                $file->move(public_path('/video'), $file_name); // to public
-            }elseif($package_type = 'archive'){
+                $file->move(public_path('/Files/Video'), $file_name); // to public
+            }elseif($package_type == 'archive'){
                 //$file->storeAs('/public/packages/archive',$file);
-                $file->move(public_path('/archive'), $file_name); // to public
+                $file->move(public_path('/Files/Archive'), $file_name); // to public
             }else{
                 //$file->storeAs('/public/packages/miscellaneous',$file);
-                $file->move(public_path('/miscellaneous'), $file_name); // to public
+                $file->move(public_path('/Files/Miscellaneous'), $file_name); // to public
             }
 
             $request->session()->put('FILENAME',$file_name);
@@ -112,7 +159,7 @@ class LocationControl extends Controller
         //DB::table('table_name')->insert($data);
         location::query()->insert($data);
 
-        return redirect('/dashboard');
+        return redirect('/dash');
 
     }
 
@@ -151,8 +198,54 @@ class LocationControl extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(location $location)
+    public function destroy(Request $request, location $location, $id)
     {
-        //
+        $USERID = $request->session()->get('USERID');
+
+        $file = location::query()
+            ->where('package_id',$id)
+            ->where('user_id',$USERID)
+            ->first();
+
+        $package_type = $file->package_type;
+        $file_name = $file->package_location;
+
+        //checking if the file exists before attempting to delete it
+
+            if($package_type == 'word'){
+                $file_path = public_path('/Files/Word') . '/' . $file_name;
+            }elseif($package_type == 'powerpoint'){
+                $file_path = public_path('/Files/Powerpoint') . '/' . $file_name;
+            }elseif($package_type == 'excel'){
+                $file_path = public_path('/Files/Excel') . '/' . $file_name;
+            }elseif($package_type == 'pdf'){
+                $file_path = public_path('/Files/PDF') . '/' . $file_name;
+            }elseif($package_type == 'code'){
+                $file_path = public_path('/Files/Code') . '/' . $file_name;
+            }elseif($package_type == 'image'){
+                $file_path = public_path('/Files/Image') . '/' . $file_name;
+            }elseif($package_type == 'audio'){
+                $file_path = public_path('/Files/Audio') . '/' . $file_name;
+            }elseif($package_type == 'video'){
+                $file_path = public_path('/Files/Video') . '/' . $file_name;
+            }elseif($package_type == 'archive'){
+                $file_path = public_path('/Files/Archive') . '/' . $file_name;
+            }else{
+                $file_path = public_path('/Files/Miscellaneous') . '/' . $file_name;
+            }
+
+            $FILEADD = $request->session()->put('FILEADD',$file_path);
+
+            if (File::exists($file_path)) {
+                File::delete($file_path); // to public
+            }
+        
+        //deleting package
+        location::query()
+            ->where('package_id',$id)
+            ->where('user_id',$USERID)
+            ->delete();
+
+        return redirect('/dash');
     }
 }
