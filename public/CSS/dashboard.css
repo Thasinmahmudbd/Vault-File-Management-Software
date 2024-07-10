@@ -287,3 +287,19 @@ select{
 .file-item {
     margin-bottom: 8px;
 }
+
+
+
+/* Note */
+
+.Note{
+    font-weight: bold;
+    color: rgba(224, 68, 68, 0.911);
+  }
+
+  .NoteMsg{
+    position: fixed;
+    bottom: 0px;
+    padding: 10px;
+    box-shadow: 1px 1px 5px 0px #000;
+  }

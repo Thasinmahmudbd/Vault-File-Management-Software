@@ -30,6 +30,7 @@
     <script defer src="{{ asset('js/contextMenu.js')}}"></script>
     <script defer src="{{ asset('js/tools.js')}}"></script>
     <script defer src="{{ asset('js/uploader.js')}}"></script>
+    <script defer src="{{ asset('js/blockBackButton.js')}}"></script>
 </head>
 
 <body class="nunito">
@@ -75,8 +76,8 @@
                         </a>-->
                         <a class="subLink_2" href="#" onclick="fileFolderAdderOpen()">Add Folder</a>
                         <a class="subLink_2" href="#">Refresh</a>
-                        <a class="subLink_2" href="#">Meet Dev</a>
-                        <a class="subLink_2" href="/tools">Tools</a>
+                        <a class="subLink_2" target="blank" href="https://thasinmahmud.com/open/contact/page">Meet Dev</a>
+                        <a class="subLink_2" href="url('/tools')">Tools</a>
                     </div>    
                 </a>
             </div>
@@ -350,6 +351,7 @@
             <p>user id: {{Session::get('USERID')}}</p>
             <p>file add: {{Session::get('FILEADD')}}</p>
             <p>child of: {{Session::get('CHILDOF')}}</p>
+            <p class="NoteMsg"><span class="Note">Note:</span> {{Session::get('NOTE')}}</p>
 
         </div>
 
@@ -363,7 +365,7 @@
                 <a href="#" onclick="fileFolderAdderOpen()">Add Folder</a>
 
                 <i class="fas fa-sync-alt"></i> 
-                <a href="">Refresh</a>
+                <a href="#">Refresh</a>
 
                 <i class="fas fa-eye"></i>
                 <div class="dualBtn">
@@ -375,7 +377,7 @@
                 <a href="#" onclick="themeChange()">Change Theme</a>
 
                 <i class="fas fa-cogs"></i>
-                <a href="">Meet Dev</a>
+                <a target="blank" href="https://thasinmahmud.com/open/contact/page">Meet Dev</a>
 
                 <i class="fas fa-tools"></i>
                 <a href="tools.html">Tools</a>
@@ -400,7 +402,7 @@
                 <a href="#" onclick="fileFolderAdderOpen()">Add Folder</a>
 
                 <i class="fas fa-sync-alt"></i> 
-                <a href="">Refresh</a>
+                <a href="#">Refresh</a>
 
                 <i class="fas fa-eye"></i>
                 <div class="dualBtn">
@@ -412,7 +414,7 @@
                 <a href="#" onclick="themeChange()">Change Theme</a>
 
                 <i class="fas fa-cogs"></i>
-                <a href="">Meet Dev</a>
+                <a target="blank" href="https://thasinmahmud.com/open/contact/page">Meet Dev</a>
 
                 <i class="fas fa-tools"></i>
                 <a href="tools.html">Tools</a>
@@ -421,7 +423,7 @@
                 <a href="#" onclick="MobNavClose()">Close Menu</a>
 
                 <i class="fa-solid fa-right-from-bracket"></i>
-                <a href="">Logout</a>
+                <a href="{{ url('/logout') }}">Logout</a>
         
             </div>
 

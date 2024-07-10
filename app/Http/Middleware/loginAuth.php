@@ -16,9 +16,14 @@ class loginAuth
     public function handle(Request $request, Closure $next): Response
     {
         $auth = $request->session()->get('USERTYPE');
+        $user = $request->session()->get('USERID');
 
         if($auth = 'admin' || $auth = 'user'){
-            return $next($request);
+            if($user <> null){
+                return $next($request);
+            }else{
+                return redirect('/');
+            }
         }else{
             return redirect('/');
         }

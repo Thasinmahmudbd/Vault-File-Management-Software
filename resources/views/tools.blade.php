@@ -29,6 +29,7 @@
     <!-- Script -->
     <script defer src="{{ asset('js/contextMenu.js')}}"></script>
     <script defer src="{{ asset('js/tools.js')}}"></script>
+    <script defer src="{{ asset('js/blockBackButton.js')}}"></script>
 </head>
 
 <body class="nunito">
@@ -67,7 +68,7 @@
                         </a>-->
                         <a class="subLink_2" href="/dashboard">Dashboard</a>
                         <a class="subLink_2" href="#">Refresh</a>
-                        <a class="subLink_2" href="#">Meet Dev</a>
+                        <a class="subLink_2" target="blank" href="https://thasinmahmud.com/open/contact/page">Meet Dev</a>
                     </div>    
                 </a>
             </div>
@@ -171,7 +172,7 @@
                 <a href="#" onclick="themeChange()">Change Theme</a>
 
                 <i class="fas fa-cogs"></i>
-                <a href="">Meet Dev</a>
+                <a target="blank" href="https://thasinmahmud.com/open/contact/page">Meet Dev</a>
 
                 <i class="fas fa-window-close"></i>
                 <a href="#" onclick="closeMenu()">Close Menu</a>
@@ -552,7 +553,7 @@
                 <a href="#" onclick="themeChange()">Change Theme</a>
 
                 <i class="fas fa-cogs"></i>
-                <a href="">Meet Dev</a>
+                <a target="blank" href="https://thasinmahmud.com/open/contact/page">Meet Dev</a>
 
                 <i class="fas fa-window-close"></i>
                 <a href="#" onclick="MobNavClose()">Close Menu</a>

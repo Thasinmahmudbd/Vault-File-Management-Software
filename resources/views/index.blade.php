@@ -27,6 +27,7 @@
     
     <!-- Script -->
     <script defer src="{{ asset('js/script.js')}}"></script>
+    <script defer src="{{ asset('js/blockBackButton.js')}}"></script>
 </head>
 
 <body class="bgGold nunito blockSelect">

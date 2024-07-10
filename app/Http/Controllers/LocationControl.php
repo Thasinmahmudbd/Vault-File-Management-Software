@@ -16,6 +16,7 @@ class LocationControl extends Controller
     {
         //changing child of
         $request->session()->put('CHILDOF','ROOT');
+        $request->session()->put('NOTE','Welcome');
         return redirect('/dash');
     }
 
@@ -26,6 +27,7 @@ class LocationControl extends Controller
     {
         //changing child of
         $request->session()->put('CHILDOF',$id);
+        $request->session()->put('NOTE','Welcome');
         return redirect('/dash');
     }
 
@@ -36,6 +38,7 @@ class LocationControl extends Controller
     {
         $CHILDOF = $request->session()->get('CHILDOF');
         $USERID = $request->session()->get('USERID');
+        $request->session()->put('NOTE','Welcome');
 
         if($CHILDOF == 'ROOT'){
             $id = $CHILDOF;
@@ -210,6 +213,18 @@ class LocationControl extends Controller
         $package_type = $file->package_type;
         $file_name = $file->package_location;
 
+        //checking if folder has any child.
+        $anyChild = location::query()
+            ->where('child_of',$id)
+            ->where('user_id',$USERID)
+            ->first();
+
+        if($anyChild->package_id > 0){
+
+            $request->session()->put('NOTE','Delete -'.$anyChild->package_name.'- first.');
+
+        }else{
+
         //checking if the file exists before attempting to delete it
 
             if($package_type == 'word'){
@@ -245,6 +260,8 @@ class LocationControl extends Controller
             ->where('package_id',$id)
             ->where('user_id',$USERID)
             ->delete();
+
+        }
 
         return redirect('/dash');
     }

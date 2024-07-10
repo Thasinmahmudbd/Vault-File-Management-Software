@@ -21,26 +21,28 @@ Route::controller(UserControl::class)->group(function(){
 });
 
 // Dashboard
-Route::controller(LocationControl::class)->group(function(){
+Route::middleware('sessionValidation')->group(function(){
+    Route::controller(LocationControl::class)->group(function(){
 
-    //get dashboard data when root.
-    Route::get('/dashboard','index');
+        //get dashboard data when root.
+        Route::get('/dashboard','index');
 
-    //post from dashboard.
-    Route::post('/addPackage','create');
+        //post from dashboard.
+        Route::post('/addPackage','create');
 
-    //delete from dashboard.
-    Route::get('/delete/{id}','destroy');
+        //delete from dashboard.
+        Route::get('/delete/{id}','destroy');
 
-    //get dashboard data.
-    Route::get('/dashboard/{id}','indexChild');
+        //get dashboard data.
+        Route::get('/dashboard/{id}','indexChild');
 
-    //go to dashboard.
-    Route::get('/dash','dash');
+        //go to dashboard.
+        Route::get('/dash','dash');
 
-    //go back to prev node.
-    Route::get('/go/back','goBack');
+        //go back to prev node.
+        Route::get('/go/back','goBack');
 
+    });
 });
 
 
