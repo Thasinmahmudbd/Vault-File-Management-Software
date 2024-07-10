@@ -115,9 +115,9 @@
                     <i class="fas fa-folder-open"></i>
                     <a href="{{ url('/dashboard', $package->package_id) }}">Open Folder</a>
                     <i class="fas fa-folder-minus"></i>
-                    <a href="{{ url('delete', $package->package_id) }}">Delete Folder</a>
+                    <a href="{{ url('/delete', $package->package_id) }}">Delete Folder</a>
                     <i class="fas fa-lock"></i>
-                    <a href="#" onclick="LockFileOpen()">Lock Folder</a>
+                    <a href="{{ url('/session/set', $package->package_id) }}" onclick="LockFileOpen()">Lock Folder</a>
                     <i class="fas fa-window-close"></i>
                     <a href="#" onclick="close_folder_option()">Close Menu</a>
                 </div>
@@ -135,7 +135,7 @@
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="{{ url('delete', $package->package_id) }}">Delete File</a>
+                    <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -157,7 +157,7 @@
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="{{ url('delete', $package->package_id) }}">Delete File</a>
+                    <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -179,7 +179,7 @@
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="{{ url('delete', $package->package_id) }}">Delete File</a>
+                    <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -201,7 +201,7 @@
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="{{ url('delete', $package->package_id) }}">Delete File</a>
+                    <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -223,7 +223,7 @@
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="{{ url('delete', $package->package_id) }}">Delete File</a>
+                    <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -245,7 +245,7 @@
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="{{ url('delete', $package->package_id) }}">Delete File</a>
+                    <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -267,7 +267,7 @@
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="{{ url('delete', $package->package_id) }}">Delete File</a>
+                    <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -289,7 +289,7 @@
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="{{ url('delete', $package->package_id) }}">Delete File</a>
+                    <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -311,7 +311,7 @@
                     <i class="fas fa-download"></i>
                     <a href="#">Download Archive</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="{{ url('delete', $package->package_id) }}">Delete Archive</a>
+                    <a href="{{ url('/delete', $package->package_id) }}">Delete Archive</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move Archive</a>
                     <i class="fas fa-lock"></i>
@@ -333,7 +333,7 @@
                     <i class="fas fa-download"></i>
                     <a href="#">Download File</a>
                     <i class="fas fa-minus-circle"></i>
-                    <a href="{{ url('delete', $package->package_id) }}">Delete File</a>
+                    <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                     <i class="fas fa-expand-arrows-alt"></i>
                     <a href="#" onclick="MoveFileOpen()">Move File</a>
                     <i class="fas fa-lock"></i>
@@ -351,6 +351,7 @@
             <p>user id: {{Session::get('USERID')}}</p>
             <p>file add: {{Session::get('FILEADD')}}</p>
             <p>child of: {{Session::get('CHILDOF')}}</p>
+            <p>set session: {{Session::get('IDPASSER')}}</p>
             <p class="NoteMsg"><span class="Note">Note:</span> {{Session::get('NOTE')}}</p>
 
         </div>
@@ -578,29 +579,61 @@
 
         <!--Lock File -->
 
-        <div class="contentBox disNone" id="LockFile">
+        @if(!empty(Session::get('IDPASSER')))
+
+        <div class="contentBox disGrid" id="LockFile">
 
             <div class="titleBox">
-                <h3>Lock File:</h3>
-                <a href="#" onclick="LockFileClose()"><i class="fas fa-times"></i></a>
+                <h3>Lock File: {{Session::get('IDPASSER')}}</h3>
+                <a href="{{ url('/session/delete') }}" onclick="LockFileClose()"><i class="fas fa-times"></i></a>
             </div>
 
-            <form action="" class="formBoxContainer">
+            <form action="{{ url('/lock/file', ['IDPASSER' => session('IDPASSER')]) }}" method="post" class="formBoxContainer">
+            @csrf
                     
                 <div class="frmElm_10 formBox">                   
                     <label  for=""> Password </label>
-                    <input  type="password">                    
+                    <input  type="password" name="code" required>                    
                 </div>
                     
                 <div class="frmElm_10 formBox">                   
                     <label  for=""> Confirm Password </label>
-                    <input  type="password">                    
+                    <input  type="password" name="confirmCode" required>                    
+                </div>
+
+                <input class="frmBtnR" value="Lock File" type="submit">
+
+            </form>
+        </div>
+
+        @else
+
+        <div class="contentBox disNone" id="LockFile">
+
+            <div class="titleBox">
+                <h3>Lock File:</h3>
+                <a href="{{ url('/session/delete') }}" onclick="LockFileClose()"><i class="fas fa-times"></i></a>
+            </div>
+
+            <form action="" class="formBoxContainer">
+            @csrf
+                    
+                <div class="frmElm_10 formBox">                   
+                    <label  for=""> Password </label>
+                    <input  type="password" name="code" required>                    
+                </div>
+                    
+                <div class="frmElm_10 formBox">                   
+                    <label  for=""> Confirm Password </label>
+                    <input  type="password" name="confirmCode" required>                    
                 </div>
 
                 <input class="frmBtnR" value="Lock File" type="button">
 
             </form>
         </div>
+
+        @endif
 
 
 

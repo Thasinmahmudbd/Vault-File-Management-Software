@@ -19,6 +19,9 @@ return new class extends Migration
             $table->longText('child_of');
             $table->longText('package_location')->nullable();
             $table->foreignId('user_id')->constrained('users');
+            $table->longText('package_status')->default('unlocked');
+            $table->longText('package_code')->nullable();
+            $table->integer('package_size')->default(0);
             $table->timestamps();
         });
     }

@@ -42,6 +42,15 @@ Route::middleware('sessionValidation')->group(function(){
         //go back to prev node.
         Route::get('/go/back','goBack');
 
+        //set session to pass to form.
+        Route::get('/session/set/{id}','setSession');
+
+        //delete set session from form.
+        Route::get('/session/delete','resetSession');
+
+        //lock file.
+        Route::post('/lock/file/{id}','lockFile');
+
     });
 });
 

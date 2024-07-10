@@ -10,6 +10,26 @@ use Illuminate\Support\Facades\File;
 class LocationControl extends Controller
 {
     /**
+     * Set session to pass data to form.
+     */
+    public function setSession(Request $request, $id)
+    {
+        //Setting session
+        $request->session()->put('IDPASSER',$id);
+        return redirect('/dash');
+    }
+
+    /**
+     * Set session to pass data to form.
+     */
+    public function resetSession(Request $request)
+    {
+        //resetting session
+        $request->session()->forget('IDPASSER');
+        return redirect('/dash');
+    }
+
+    /**
      * Set node to root.
      */
     public function index(Request $request)
@@ -77,6 +97,16 @@ class LocationControl extends Controller
     }
 
     /**
+     * Lock file.
+     */
+    public function lockFile(Request $request, $id)
+    {
+        //lock specific file
+        $request->session()->put('NOTE','Locking '.$id);
+        return redirect('/dash');
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create(Request $request)
@@ -111,6 +141,8 @@ class LocationControl extends Controller
             $file=$request->file('file_input');
             $ext=$file->extension();
             $file_name=$package_name.$rand.'.'.$ext;
+
+            $file_size = $file->getSize();
 
             if($package_type == 'word'){
                 //$file->storeAs('/public/packages/word',$file);
@@ -153,7 +185,9 @@ class LocationControl extends Controller
                 'package_type'=>$request->input('file_type'),
                 'user_id'=>$USERID,
                 'child_of'=>$CHILDOF,
-                'package_location'=>$file_name
+                'package_location'=>$file_name,
+                'package_size'=>$file_size
+                
             );
             
         }
@@ -219,7 +253,7 @@ class LocationControl extends Controller
             ->where('user_id',$USERID)
             ->first();
 
-        if($anyChild->package_id > 0){
+        if(!empty($anyChild->package_id)){
 
             $request->session()->put('NOTE','Delete -'.$anyChild->package_name.'- first.');
 
