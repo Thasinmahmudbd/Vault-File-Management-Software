@@ -14,8 +14,21 @@ class LocationControl extends Controller
      */
     public function setSession(Request $request, $id)
     {
+        $USERID = $request->session()->get('USERID');
+        
+        $node = location::query()
+            ->where('package_id',$id)
+            ->where('user_id',$USERID)
+            ->first();
+
+        $package_name = $node->package_name;
+        $package_status = $node->package_status;
+
         //Setting session
         $request->session()->put('IDPASSER',$id);
+        $request->session()->put('NAMEPASSER',$package_name);
+        $request->session()->put('STATUSPASSER',$package_status);
+
         return redirect('/dash');
     }
 
@@ -26,6 +39,8 @@ class LocationControl extends Controller
     {
         //resetting session
         $request->session()->forget('IDPASSER');
+        $request->session()->forget('NAMEPASSER');
+        $request->session()->forget('STATUSPASSER');
         return redirect('/dash');
     }
 
@@ -101,8 +116,98 @@ class LocationControl extends Controller
      */
     public function lockFile(Request $request, $id)
     {
-        //lock specific file
-        $request->session()->put('NOTE','Locking '.$id);
+        $USERID = $request->session()->get('USERID');
+        $NAMEPASSER = $request->session()->get('NAMEPASSER');
+
+        $request->validate([
+            'confirmCode'=>'required|string|min:4',
+            'code'=>'required|string|min:4',
+        ]);
+
+        $code = $request->input('code');
+        $confirmCode = $request->input('confirmCode');
+
+        if($code == $confirmCode){
+
+            //Getting data from form.
+            $data=array(
+                'package_code'=>$code,
+                'package_status'=>'locked'
+            );
+            
+            //lock specific file
+            $packages = location::query()
+                ->where('package_id',$id)
+                ->where('user_id',$USERID)
+                ->update($data);
+
+            $request->session()->put('NOTE',$NAMEPASSER.' - Locked');
+
+            return redirect('/session/delete');
+
+        }else{
+
+            $request->session()->put('NOTE','Failed: Passwords not matching, try again.');
+
+        }
+
+        return redirect('/dash');
+    }
+
+    /**
+     * Unlock file.
+     */
+    public function unlockFile(Request $request, $id)
+    {
+        $USERID = $request->session()->get('USERID');
+        $NAMEPASSER = $request->session()->get('NAMEPASSER');
+
+        $request->validate([
+            'confirmCode'=>'required|string|min:4',
+            'code'=>'required|string|min:4',
+        ]);
+
+        $code = $request->input('code');
+        $confirmCode = $request->input('confirmCode');
+
+        if($code == $confirmCode){
+
+            //Unlock specific file
+            $checkCode = location::query()
+                ->where('package_id',$id)
+                ->where('user_id',$USERID)
+                ->first();
+
+            if($checkCode->package_code == $code){
+
+                //Getting data from form.
+                $data=array(
+                    'package_code'=>null,
+                    'package_status'=>'unlocked'
+                );
+                
+                //Unlock specific file
+                $packages = location::query()
+                    ->where('package_id',$id)
+                    ->where('user_id',$USERID)
+                    ->update($data);
+
+                $request->session()->put('NOTE',$NAMEPASSER.' - Unlocked');
+
+            }else{
+
+                $request->session()->put('NOTE','Failed: Wrong password, try again.');
+
+            }
+
+            return redirect('/session/delete');
+
+        }else{
+
+            $request->session()->put('NOTE','Failed: Passwords not matching, try again.');
+
+        }
+
         return redirect('/dash');
     }
 

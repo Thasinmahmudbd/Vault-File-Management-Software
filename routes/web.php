@@ -51,6 +51,9 @@ Route::middleware('sessionValidation')->group(function(){
         //lock file.
         Route::post('/lock/file/{id}','lockFile');
 
+        //unlock file.
+        Route::post('/unlock/file/{id}','unlockFile');
+
     });
 });
 
