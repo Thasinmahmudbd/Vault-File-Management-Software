@@ -30,6 +30,12 @@ Route::middleware('sessionValidation')->group(function(){
         //post from dashboard.
         Route::post('/addPackage','create');
 
+        //remove from dashboard.
+        Route::get('/remove/{id}','remove');
+
+        //restore to dashboard.
+        Route::get('/restore/{id}','restore');
+
         //delete from dashboard.
         Route::get('/delete/{id}','destroy');
 
@@ -63,12 +69,15 @@ Route::middleware('sessionValidation')->group(function(){
         //search current folder.
         Route::post('/search/dash','searchFolder');
 
+        //go to tools.
+        Route::get('/tools','tools');
+
     });
 });
 
 
 //Route::get('/user', [UserControl::class,'getUser']);
 
-Route::get('/tools', function () {
+/*Route::get('/tools', function () {
     return view('tools')->middleware('sessionCheck');
-});
+});*/

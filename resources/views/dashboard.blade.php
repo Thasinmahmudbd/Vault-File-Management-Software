@@ -78,7 +78,7 @@
                         <a class="subLink_2" href="{{ url('/dashboard') }}">Dashboard</a>
                         <a class="subLink_2" href="#">Refresh</a>
                         <a class="subLink_2" target="blank" href="https://thasinmahmud.com/open/contact/page">Meet Dev</a>
-                        <a class="subLink_2" href="url('/tools')">Tools</a>
+                        <a class="subLink_2" href="{{ url('/tools') }}">Tools</a>
                     </div>
                 </a>
             </div>
@@ -118,7 +118,7 @@
                         <i class="fas fa-folder-open"></i>
                         <a href="{{ url('/dashboard', $package->package_id) }}">Open Folder</a>
                         <i class="fas fa-folder-minus"></i>
-                        <a href="{{ url('/delete', $package->package_id) }}">Delete Folder</a>
+                        <a href="{{ url('/remove', $package->package_id) }}">Delete Folder</a>
                         <i class="fas fa-expand-arrows-alt"></i>
                         <a href="{{ url('/session/set/move', $package->package_id) }}" onclick="MoveFileOpen()">Move Folder</a>
                         <i class="fas fa-lock"></i>
@@ -140,7 +140,7 @@
                         <i class="fas fa-download"></i>
                         <a href="{{asset('Files/Word/'.$package->package_location)}}" download="{{$package->package_name}}">Download File</a>
                         <i class="fas fa-minus-circle"></i>
-                        <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
+                        <a href="{{ url('/remove', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
                         <a href="{{ url('/session/set/move', $package->package_id) }}" onclick="MoveFileOpen()">Move File</a>
                         <i class="fas fa-lock"></i>
@@ -162,7 +162,7 @@
                         <i class="fas fa-download"></i>
                         <a href="{{asset('Files/Powerpoint/'.$package->package_location)}}" download="{{$package->package_name}}">Download File</a>
                         <i class="fas fa-minus-circle"></i>
-                        <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
+                        <a href="{{ url('/remove', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
                         <a href="{{ url('/session/set/move', $package->package_id) }}" onclick="MoveFileOpen()">Move File</a>
                         <i class="fas fa-lock"></i>
@@ -184,7 +184,7 @@
                         <i class="fas fa-download"></i>
                         <a href="{{asset('Files/PDF/'.$package->package_location)}}" download="{{$package->package_name}}">Download File</a>
                         <i class="fas fa-minus-circle"></i>
-                        <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
+                        <a href="{{ url('/remove', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
                         <a href="{{ url('/session/set/move', $package->package_id) }}" onclick="MoveFileOpen()">Move File</a>
                         <i class="fas fa-lock"></i>
@@ -206,7 +206,7 @@
                         <i class="fas fa-download"></i>
                         <a href="{{asset('Files/Excel/'.$package->package_location)}}" download="{{$package->package_name}}">Download File</a>
                         <i class="fas fa-minus-circle"></i>
-                        <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
+                        <a href="{{ url('/remove', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
                         <a href="{{ url('/session/set/move', $package->package_id) }}" onclick="MoveFileOpen()">Move File</a>
                         <i class="fas fa-lock"></i>
@@ -228,7 +228,7 @@
                         <i class="fas fa-download"></i>
                         <a href="{{asset('Files/Code/'.$package->package_location)}}" download="{{$package->package_name}}">Download File</a>
                         <i class="fas fa-minus-circle"></i>
-                        <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
+                        <a href="{{ url('/remove', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
                         <a href="{{ url('/session/set/move', $package->package_id) }}" onclick="MoveFileOpen()">Move File</a>
                         <i class="fas fa-lock"></i>
@@ -250,7 +250,7 @@
                         <i class="fas fa-download"></i>
                         <a href="{{asset('Files/Image/'.$package->package_location)}}" download="{{$package->package_name}}">Download File</a>
                         <i class="fas fa-minus-circle"></i>
-                        <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
+                        <a href="{{ url('/remove', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
                         <a href="{{ url('/session/set/move', $package->package_id) }}" onclick="MoveFileOpen()">Move File</a>
                         <i class="fas fa-lock"></i>
@@ -272,7 +272,7 @@
                         <i class="fas fa-download"></i>
                         <a href="{{asset('Files/Audio/'.$package->package_location)}}" download="{{$package->package_name}}">Download File</a>
                         <i class="fas fa-minus-circle"></i>
-                        <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
+                        <a href="{{ url('/remove', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
                         <a href="{{ url('/session/set/move', $package->package_id) }}" onclick="MoveFileOpen()">Move File</a>
                         <i class="fas fa-lock"></i>
@@ -294,7 +294,7 @@
                         <i class="fas fa-download"></i>
                         <a href="{{asset('Files/Video/'.$package->package_location)}}" download="{{$package->package_name}}">Download File</a>
                         <i class="fas fa-minus-circle"></i>
-                        <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
+                        <a href="{{ url('/remove', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
                         <a href="{{ url('/session/set/move', $package->package_id) }}" onclick="MoveFileOpen()">Move File</a>
                         <i class="fas fa-lock"></i>
@@ -316,7 +316,7 @@
                         <i class="fas fa-download"></i>
                         <a href="{{asset('Files/Archive/'.$package->package_location)}}" download="{{$package->package_name}}">Download Archive</a>
                         <i class="fas fa-minus-circle"></i>
-                        <a href="{{ url('/delete', $package->package_id) }}">Delete Archive</a>
+                        <a href="{{ url('/remove', $package->package_id) }}">Delete Archive</a>
                         <i class="fas fa-expand-arrows-alt"></i>
                         <a href="{{ url('/session/set/move', $package->package_id) }}" onclick="MoveFileOpen()">Move Archive</a>
                         <i class="fas fa-lock"></i>
@@ -338,7 +338,7 @@
                         <i class="fas fa-download"></i>
                         <a href="{{asset('Files/Miscellaneous/'.$package->package_location)}}" download="{{$package->package_name}}">Download File</a>
                         <i class="fas fa-minus-circle"></i>
-                        <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
+                        <a href="{{ url('/remove', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
                         <a href="{{ url('/session/set/move', $package->package_id) }}" onclick="MoveFileOpen()">Move File</a>
                         <i class="fas fa-lock"></i>
@@ -350,7 +350,7 @@
 
                 @endif
 
-            @else
+            @elseif($package->package_status == 'locked')
 
                 <!--Locked template-->
                 <div class="folderPack">
@@ -408,7 +408,7 @@
                 <a target="blank" href="https://thasinmahmud.com/open/contact/page">Meet Dev</a>
 
                 <i class="fas fa-tools"></i>
-                <a href="tools.html">Tools</a>
+                <a href="{{ url('/tools') }}">Tools</a>
 
                 <i class="fas fa-arrow-left"></i>
                 <a href="{{ url('/go/back') }}">Go Back</a>
@@ -451,7 +451,7 @@
                 <a target="blank" href="https://thasinmahmud.com/open/contact/page">Meet Dev</a>
 
                 <i class="fas fa-tools"></i>
-                <a href="tools.html">Tools</a>
+                <a href="{{ url('/tools') }}">Tools</a>
 
                 <i class="fas fa-arrow-left"></i>
                 <a href="{{ url('/go/back') }}">Go Back</a>

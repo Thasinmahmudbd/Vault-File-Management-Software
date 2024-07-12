@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\File;
 
 class LocationControl extends Controller
 {
-    /**
-     * Set session to pass data to form [locking].
-     */
+    ##############################################
+     # Set session to pass data to form [locking].
+    ##############################################
     public function setSession(Request $request, $id)
     {
         $USERID = $request->session()->get('USERID');
@@ -33,9 +33,9 @@ class LocationControl extends Controller
         return redirect('/dash');
     }
 
-    /**
-     * Set session to pass data to form [moving].
-     */
+    ##############################################
+     # Set session to pass data to form [moving].
+    ##############################################
     public function setSession2(Request $request, $id)
     {
         $USERID = $request->session()->get('USERID');
@@ -57,9 +57,9 @@ class LocationControl extends Controller
         return redirect('/dash');
     }
 
-    /**
-     * Set session to pass data to form.
-     */
+    ##############################################
+     # Set session to pass data to form.
+    ##############################################
     public function resetSession(Request $request)
     {
         //resetting session
@@ -70,9 +70,9 @@ class LocationControl extends Controller
         return redirect('/dash');
     }
 
-    /**
-     * Set node to root.
-     */
+    ##############################################
+     # Set node to root.
+    ##############################################
     public function index(Request $request)
     {
         //changing child of
@@ -81,9 +81,9 @@ class LocationControl extends Controller
         return redirect('/dash');
     }
 
-    /**
-     * Set node to child.
-     */
+    ##############################################
+     # Set node to child.
+    ##############################################
     public function indexChild(Request $request, $id)
     {
         //changing child of
@@ -92,9 +92,9 @@ class LocationControl extends Controller
         return redirect('/dash');
     }
 
-    /**
-     * Go back to previous node.
-     */
+    ##############################################
+     # Go back to previous node.
+    ##############################################
     public function goBack(Request $request)
     {
         $CHILDOF = $request->session()->get('CHILDOF');
@@ -117,9 +117,9 @@ class LocationControl extends Controller
         return redirect('/dash');
     }
 
-    /**
-     * Search resource in current dashboard.
-     */
+    ##############################################
+     # Search resource in current dashboard.
+    ##############################################
     public function searchFolder(Request $request)
     {
         //Getting key from search bar.
@@ -136,14 +136,14 @@ class LocationControl extends Controller
             ->where('user_id',$USERID)
             //->orWhere('package_type','like','%'.$key.'%') for intensive search
             //->orWhere('package_status','like','%'.$key.'%')
-            ->orderBy('created_at','desc')
+            ->orderBy('package_type','asc')
             ->get();
 
         $folders = location::query()
             ->where('package_type','folder')
             ->where('package_opened_as','folder')
             ->where('user_id',$USERID)
-            ->orderBy('created_at','desc')
+            ->orderBy('package_type','asc')
             ->get();
 
         $count = count($packages);
@@ -158,9 +158,9 @@ class LocationControl extends Controller
 
     }
 
-     /**
-     * Display resource in dashboard.
-     */
+    ##############################################
+     # Display resource in dashboard.
+    ##############################################
     public function dash(Request $request)
     {
         //Getting all packages based no location.
@@ -171,23 +171,23 @@ class LocationControl extends Controller
         $packages = location::query()
             ->where('child_of',$CHILDOF)
             ->where('user_id',$USERID)
-            ->orderBy('created_at','desc')
+            ->orderBy('package_type','asc')
             ->get();
 
         $folders = location::query()
             ->where('package_type','folder')
             ->where('package_opened_as','folder')
             ->where('user_id',$USERID)
-            ->orderBy('created_at','desc')
+            ->orderBy('package_type','asc')
             ->get();
 
         return view('dashboard', ['packages'=> $packages], ['folders'=> $folders]);
 
     }
 
-    /**
-     * Lock file.
-     */
+    ##############################################
+     # Lock file.
+    ##############################################
     public function lockFile(Request $request, $id)
     {
         $USERID = $request->session()->get('USERID');
@@ -215,7 +215,7 @@ class LocationControl extends Controller
                 ->where('user_id',$USERID)
                 ->update($data);
 
-            $request->session()->put('NOTE',$NAMEPASSER.' - Locked');
+            $request->session()->put('NOTE',$NAMEPASSER.' - Locked.');
 
             return redirect('/session/delete');
 
@@ -228,9 +228,9 @@ class LocationControl extends Controller
         return redirect('/dash');
     }
 
-    /**
-     * Unlock file.
-     */
+    ##############################################
+     # Unlock file.
+    ##############################################
     public function unlockFile(Request $request, $id)
     {
         $USERID = $request->session()->get('USERID');
@@ -266,7 +266,7 @@ class LocationControl extends Controller
                     ->where('user_id',$USERID)
                     ->update($data);
 
-                $request->session()->put('NOTE',$NAMEPASSER.' - Unlocked');
+                $request->session()->put('NOTE',$NAMEPASSER.' - Unlocked.');
 
             }else{
 
@@ -285,9 +285,50 @@ class LocationControl extends Controller
         return redirect('/dash');
     }
 
-    /**
-     * Move file.
-     */
+    ##############################################
+     # Remove file.
+    ##############################################
+    public function remove(Request $request, $id)
+    {
+        $USERID = $request->session()->get('USERID');
+
+        //checking if folder has any child.
+        $anyChild = location::query()
+            ->where('child_of',$id)
+            ->where('user_id',$USERID)
+            ->first();
+
+        if(!empty($anyChild->package_id)){
+
+            $request->session()->put('NOTE','Delete -'.$anyChild->package_name.'- first.');
+
+        }else{
+
+            //lock specific file
+            $data=array(
+                'package_status'=>'removed'
+            );
+
+            $packages = location::query()
+                ->where('package_id',$id)
+                ->where('user_id',$USERID)
+                ->update($data);
+
+            $dash = location::query()
+                ->where('package_id',$id)
+                ->where('user_id',$USERID)
+                ->first();
+
+            $request->session()->put('NOTE',$dash->package_name.' - Deleted, go to recycle bin to restore.');
+
+        }
+
+        return redirect('/dash');
+    }
+
+    ##############################################
+     # Move file.
+    ##############################################
     public function moveFile(Request $request, $id)
     {
         $USERID = $request->session()->get('USERID');
@@ -323,9 +364,9 @@ class LocationControl extends Controller
         return redirect('/session/delete');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    ##############################################
+     # Show the form for creating a new resource.
+    ##############################################
     public function create(Request $request)
     {
         //getting package data from form.
@@ -417,41 +458,62 @@ class LocationControl extends Controller
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    ##############################################
+     # Store a newly created resource in storage.
+    ##############################################
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(location $location)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
+    ##############################################
+     # Show the form for editing the specified resource.
+    ##############################################
     public function edit(location $location)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    ##############################################
+     # Update the specified resource in storage.
+    ##############################################
     public function update(Request $request, location $location)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* TOOLS */
+
+    ##############################################
+     # Remove the specified resource from storage.
+    ##############################################
     public function destroy(Request $request, location $location, $id)
     {
         $USERID = $request->session()->get('USERID');
@@ -463,18 +525,6 @@ class LocationControl extends Controller
 
         $package_type = $file->package_type;
         $file_name = $file->package_location;
-
-        //checking if folder has any child.
-        $anyChild = location::query()
-            ->where('child_of',$id)
-            ->where('user_id',$USERID)
-            ->first();
-
-        if(!empty($anyChild->package_id)){
-
-            $request->session()->put('NOTE','Delete -'.$anyChild->package_name.'- first.');
-
-        }else{
 
         //checking if the file exists before attempting to delete it
 
@@ -512,7 +562,53 @@ class LocationControl extends Controller
             ->where('user_id',$USERID)
             ->delete();
 
-        }
+        $request->session()->put('NOTE','Deleted -'.$file->package_name.'- permanently.');
+
+        return redirect('/tools');
+    }
+
+    ##############################################
+     # Display tools.
+    ##############################################
+    public function tools(Request $request, location $location)
+    {
+        //Getting all packages based no location.
+        $USERTYPE = $request->session()->get('USERTYPE');
+        $USERID = $request->session()->get('USERID');
+
+        $packages = location::query()
+            ->where('package_status','removed')
+            ->where('user_id',$USERID)
+            ->orderBy('package_type','asc')
+            ->get();
+
+        return view('tools', ['packages'=> $packages]);
+    }
+
+    ##############################################
+     # Restore file.
+    ##############################################
+    public function restore(Request $request, $id)
+    {
+        $USERID = $request->session()->get('USERID');
+
+        //lock specific file
+        $data=array(
+            'package_status'=>'unlocked'
+        );
+
+        $packages = location::query()
+            ->where('package_id',$id)
+            ->where('user_id',$USERID)
+            ->update($data);
+
+        $dash = location::query()
+            ->where('package_id',$id)
+            ->where('user_id',$USERID)
+            ->first();
+
+        $request->session()->put('CHILDOF', $dash->child_of);
+        $request->session()->put('NOTE',$dash->package_name.' - Restored to dashboard.');
 
         return redirect('/dash');
     }
