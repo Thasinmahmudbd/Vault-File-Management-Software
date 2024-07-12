@@ -60,6 +60,9 @@ Route::middleware('sessionValidation')->group(function(){
         //move file.
         Route::get('/make/mother/{id}','moveFile');
 
+        //search current folder.
+        Route::post('/search/dash','searchFolder');
+
     });
 });
 

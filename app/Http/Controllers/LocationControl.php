@@ -117,12 +117,53 @@ class LocationControl extends Controller
         return redirect('/dash');
     }
 
+    /**
+     * Search resource in current dashboard.
+     */
+    public function searchFolder(Request $request)
+    {
+        //Getting key from search bar.
+        $key = $request->input('key');
+
+        //Getting results based no search.
+        $USERTYPE = $request->session()->get('USERTYPE');
+        $USERID = $request->session()->get('USERID');
+        $CHILDOF = $request->session()->get('CHILDOF');
+
+        $packages = location::query()
+            ->where('package_name','like','%'.$key.'%')
+            ->where('child_of',$CHILDOF)
+            ->where('user_id',$USERID)
+            //->orWhere('package_type','like','%'.$key.'%') for intensive search
+            //->orWhere('package_status','like','%'.$key.'%')
+            ->orderBy('created_at','desc')
+            ->get();
+
+        $folders = location::query()
+            ->where('package_type','folder')
+            ->where('package_opened_as','folder')
+            ->where('user_id',$USERID)
+            ->orderBy('created_at','desc')
+            ->get();
+
+        $count = count($packages);
+
+        if(!empty($packages)){
+            $request->session()->put('NOTE','You searched for ['.$key.'], '.$count.' entries found.');
+        }else{
+            $request->session()->put('NOTE','You searched for ['.$key.'], nothing found.');
+        }
+
+        return view('dashboard', ['packages'=> $packages], ['folders'=> $folders]);
+
+    }
+
      /**
      * Display resource in dashboard.
      */
     public function dash(Request $request)
     {
-        //Geting all packages based no location.
+        //Getting all packages based no location.
         $USERTYPE = $request->session()->get('USERTYPE');
         $USERID = $request->session()->get('USERID');
         $CHILDOF = $request->session()->get('CHILDOF');

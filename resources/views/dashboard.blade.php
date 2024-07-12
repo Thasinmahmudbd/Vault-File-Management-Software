@@ -42,9 +42,10 @@
         <p class="txtLogo">VAULT</p>
 
         <!-- Search Form. -->
-        <form class="searchBar" action="#">
-            <input class="searchField" type="text">
-            <button class="searchBtn" type="input"><i class="fas fa-search"></i></button>
+        <form class="searchBar" action="{{ url('/search/dash') }}" method="post">
+        @csrf
+            <input class="searchField" type="text" name="key" placeholder="Search files in current folder" required>
+            <button class="searchBtn" type="submit"><i class="fas fa-search"></i></button>
         </form>
 
         <!-- Links. -->
@@ -137,7 +138,7 @@
                     </a>
                     <div class="option_menu">
                         <i class="fas fa-download"></i>
-                        <a href="#">Download File</a>
+                        <a href="{{asset('Files/Word/'.$package->package_location)}}" download="{{$package->package_name}}">Download File</a>
                         <i class="fas fa-minus-circle"></i>
                         <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -159,7 +160,7 @@
                     </a>
                     <div class="option_menu">
                         <i class="fas fa-download"></i>
-                        <a href="#">Download File</a>
+                        <a href="{{asset('Files/Powerpoint/'.$package->package_location)}}" download="{{$package->package_name}}">Download File</a>
                         <i class="fas fa-minus-circle"></i>
                         <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -181,7 +182,7 @@
                     </a>
                     <div class="option_menu">
                         <i class="fas fa-download"></i>
-                        <a href="#">Download File</a>
+                        <a href="{{asset('Files/PDF/'.$package->package_location)}}" download="{{$package->package_name}}">Download File</a>
                         <i class="fas fa-minus-circle"></i>
                         <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -203,7 +204,7 @@
                     </a>
                     <div class="option_menu">
                         <i class="fas fa-download"></i>
-                        <a href="#">Download File</a>
+                        <a href="{{asset('Files/Excel/'.$package->package_location)}}" download="{{$package->package_name}}">Download File</a>
                         <i class="fas fa-minus-circle"></i>
                         <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -225,7 +226,7 @@
                     </a>
                     <div class="option_menu">
                         <i class="fas fa-download"></i>
-                        <a href="#">Download File</a>
+                        <a href="{{asset('Files/Code/'.$package->package_location)}}" download="{{$package->package_name}}">Download File</a>
                         <i class="fas fa-minus-circle"></i>
                         <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -247,7 +248,7 @@
                     </a>
                     <div class="option_menu">
                         <i class="fas fa-download"></i>
-                        <a href="#">Download File</a>
+                        <a href="{{asset('Files/Image/'.$package->package_location)}}" download="{{$package->package_name}}">Download File</a>
                         <i class="fas fa-minus-circle"></i>
                         <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -269,7 +270,7 @@
                     </a>
                     <div class="option_menu">
                         <i class="fas fa-download"></i>
-                        <a href="#">Download File</a>
+                        <a href="{{asset('Files/Audio/'.$package->package_location)}}" download="{{$package->package_name}}">Download File</a>
                         <i class="fas fa-minus-circle"></i>
                         <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -291,7 +292,7 @@
                     </a>
                     <div class="option_menu">
                         <i class="fas fa-download"></i>
-                        <a href="#">Download File</a>
+                        <a href="{{asset('Files/Video/'.$package->package_location)}}" download="{{$package->package_name}}">Download File</a>
                         <i class="fas fa-minus-circle"></i>
                         <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -313,7 +314,7 @@
                     </a>
                     <div class="option_menu">
                         <i class="fas fa-download"></i>
-                        <a href="#">Download Archive</a>
+                        <a href="{{asset('Files/Archive/'.$package->package_location)}}" download="{{$package->package_name}}">Download Archive</a>
                         <i class="fas fa-minus-circle"></i>
                         <a href="{{ url('/delete', $package->package_id) }}">Delete Archive</a>
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -335,7 +336,7 @@
                     </a>
                     <div class="option_menu">
                         <i class="fas fa-download"></i>
-                        <a href="#">Download File</a>
+                        <a href="{{asset('Files/Miscellaneous/'.$package->package_location)}}" download="{{$package->package_name}}">Download File</a>
                         <i class="fas fa-minus-circle"></i>
                         <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
