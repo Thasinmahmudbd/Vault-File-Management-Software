@@ -42,8 +42,11 @@ Route::middleware('sessionValidation')->group(function(){
         //go back to prev node.
         Route::get('/go/back','goBack');
 
-        //set session to pass to form.
-        Route::get('/session/set/{id}','setSession');
+        //set session to pass to form [locking].
+        Route::get('/session/set/lock/{id}','setSession');
+
+        //set session to pass to form [moving].
+        Route::get('/session/set/move/{id}','setSession2');
 
         //delete set session from form.
         Route::get('/session/delete','resetSession');
@@ -53,6 +56,9 @@ Route::middleware('sessionValidation')->group(function(){
 
         //unlock file.
         Route::post('/unlock/file/{id}','unlockFile');
+
+        //move file.
+        Route::get('/make/mother/{id}','moveFile');
 
     });
 });

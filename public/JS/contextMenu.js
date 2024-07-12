@@ -1,4 +1,4 @@
-// Open menu  
+// Open menu
     var x = null;
     var y = null;
     var winWidth = null;
@@ -7,7 +7,7 @@
     //document.addEventListener('mousemove', onMouseUpdate, false);
     //document.addEventListener('mouseenter', onMouseUpdate, false);
     document.addEventListener('contextmenu', onMouseUpdate, false);
-        
+
     function onMouseUpdate(e) {
         x = e.pageX;
         y = e.pageY;
@@ -23,12 +23,12 @@
         if(x>winWidth-150){
             menu.style.left=x-135 + "px";
         }
-        if(y>winHeight-230){
-            menu.style.top=y-200 + "px";
+        if(y>winHeight-280){
+            menu.style.top=y-280 + "px";
         }
         if(y<60){
             menu.style.top=60 + "px";
-        }   
+        }
     }
 
 // Close menu
@@ -37,7 +37,7 @@
         menu.style.display="none";
     }
 
-// Theme change 
+// Theme change
     function themeChange() {
         var mode = document.querySelector('.themeMode');
 
@@ -54,7 +54,7 @@
         }
 
         localStorage.setItem("ModeTheme", JSON.stringify(theme));
-    } 
+    }
 
     let restoreTheme = JSON.parse(localStorage.getItem("ModeTheme"));
     var mode = document.querySelector('.themeMode');
@@ -162,7 +162,7 @@ function toggleOptionMenu(event) {
     //e.preventDefault();
     //menu = document.getElementById("popupR");
     // menu.style.display="grid";
-        
+
     // menu.style.top=y + "px";
     // menu.style.left=x + "px";
     // if(x>winWidth-150){
@@ -173,7 +173,7 @@ function toggleOptionMenu(event) {
     // }
     // if(y<60){
     //     menu.style.top=60 + "px";
-    // }   
+    // }
 
     // Set the position of the option menu
     optionMenu.style.display = 'grid';
@@ -187,7 +187,7 @@ function toggleOptionMenu(event) {
     }
     /*if(mouseY<60){
         optionMenu.style.top=60 + "px";
-    }*/ 
+    }*/
     console.log("End: " +mouseX, mouseY, winWidth, winHeight);
 }
 

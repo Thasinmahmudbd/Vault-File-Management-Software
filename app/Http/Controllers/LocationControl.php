@@ -10,12 +10,12 @@ use Illuminate\Support\Facades\File;
 class LocationControl extends Controller
 {
     /**
-     * Set session to pass data to form.
+     * Set session to pass data to form [locking].
      */
     public function setSession(Request $request, $id)
     {
         $USERID = $request->session()->get('USERID');
-        
+
         $node = location::query()
             ->where('package_id',$id)
             ->where('user_id',$USERID)
@@ -28,6 +28,31 @@ class LocationControl extends Controller
         $request->session()->put('IDPASSER',$id);
         $request->session()->put('NAMEPASSER',$package_name);
         $request->session()->put('STATUSPASSER',$package_status);
+        $request->session()->put('REASON','locking');
+
+        return redirect('/dash');
+    }
+
+    /**
+     * Set session to pass data to form [moving].
+     */
+    public function setSession2(Request $request, $id)
+    {
+        $USERID = $request->session()->get('USERID');
+
+        $node = location::query()
+            ->where('package_id',$id)
+            ->where('user_id',$USERID)
+            ->first();
+
+        $package_name = $node->package_name;
+        $package_status = $node->package_status;
+
+        //Setting session
+        $request->session()->put('IDPASSER',$id);
+        $request->session()->put('NAMEPASSER',$package_name);
+        $request->session()->put('STATUSPASSER',$package_status);
+        $request->session()->put('REASON','moving');
 
         return redirect('/dash');
     }
@@ -41,6 +66,7 @@ class LocationControl extends Controller
         $request->session()->forget('IDPASSER');
         $request->session()->forget('NAMEPASSER');
         $request->session()->forget('STATUSPASSER');
+        $request->session()->forget('REASON');
         return redirect('/dash');
     }
 
@@ -85,7 +111,7 @@ class LocationControl extends Controller
 
             $id = $node->child_of;
         }
-        
+
         //changing child of
         $request->session()->put('CHILDOF',$id);
         return redirect('/dash');
@@ -107,8 +133,15 @@ class LocationControl extends Controller
             ->orderBy('created_at','desc')
             ->get();
 
-        return view('dashboard', ['packages'=> $packages]);
-        
+        $folders = location::query()
+            ->where('package_type','folder')
+            ->where('package_opened_as','folder')
+            ->where('user_id',$USERID)
+            ->orderBy('created_at','desc')
+            ->get();
+
+        return view('dashboard', ['packages'=> $packages], ['folders'=> $folders]);
+
     }
 
     /**
@@ -134,7 +167,7 @@ class LocationControl extends Controller
                 'package_code'=>$code,
                 'package_status'=>'locked'
             );
-            
+
             //lock specific file
             $packages = location::query()
                 ->where('package_id',$id)
@@ -185,7 +218,7 @@ class LocationControl extends Controller
                     'package_code'=>null,
                     'package_status'=>'unlocked'
                 );
-                
+
                 //Unlock specific file
                 $packages = location::query()
                     ->where('package_id',$id)
@@ -209,6 +242,44 @@ class LocationControl extends Controller
         }
 
         return redirect('/dash');
+    }
+
+    /**
+     * Move file.
+     */
+    public function moveFile(Request $request, $id)
+    {
+        $USERID = $request->session()->get('USERID');
+        $IDPASSER = $request->session()->get('IDPASSER');
+        $NAMEPASSER = $request->session()->get('NAMEPASSER');
+
+        //move specific file
+        $data=array(
+            'child_of'=>$id
+        );
+
+        $packages = location::query()
+            ->where('package_id',$IDPASSER)
+            ->where('user_id',$USERID)
+            ->update($data);
+
+        if($id != 'ROOT'){
+
+            //get folder info
+            $folder = location::query()
+                ->where('package_id',$id)
+                ->where('user_id',$USERID)
+                ->first();
+
+            $request->session()->put('NOTE','File ['.$NAMEPASSER.'] moved to folder ['.$folder->package_name.'].');
+
+        }else{
+
+            $request->session()->put('NOTE','File ['.$NAMEPASSER.'] moved to Dashboard [ROOT].');
+
+        }
+
+        return redirect('/session/delete');
     }
 
     /**
@@ -292,9 +363,9 @@ class LocationControl extends Controller
                 'child_of'=>$CHILDOF,
                 'package_location'=>$file_name,
                 'package_size'=>$file_size
-                
+
             );
-            
+
         }
 
         //DB::table('table_name')->where('D_ID',$d_id)->update($data);
@@ -393,7 +464,7 @@ class LocationControl extends Controller
             if (File::exists($file_path)) {
                 File::delete($file_path); // to public
             }
-        
+
         //deleting package
         location::query()
             ->where('package_id',$id)

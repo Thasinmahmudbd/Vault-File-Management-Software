@@ -25,12 +25,11 @@
     <!-- Custom Style-->
     <link rel="stylesheet" href="{{ asset('css/tools.css')}}">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css')}}">
-    
+
     <!-- Script -->
     <script defer src="{{ asset('js/contextMenu.js')}}"></script>
     <script defer src="{{ asset('js/tools.js')}}"></script>
     <script defer src="{{ asset('js/uploader.js')}}"></script>
-    <script defer src="{{ asset('js/blockBackButton.js')}}"></script>
 </head>
 
 <body class="nunito">
@@ -38,16 +37,16 @@
     <!--NAV BAR-->
 
     <div class="navType_2 bgGold">
-    
+
         <!-- Text Logo. -->
         <p class="txtLogo">VAULT</p>
-    
+
         <!-- Search Form. -->
         <form class="searchBar" action="#">
             <input class="searchField" type="text">
             <button class="searchBtn" type="input"><i class="fas fa-search"></i></button>
         </form>
-    
+
         <!-- Links. -->
         <div class="mainLinks_2">
 
@@ -75,10 +74,11 @@
                             </div>
                         </a>-->
                         <a class="subLink_2" href="#" onclick="fileFolderAdderOpen()">Add Folder</a>
+                        <a class="subLink_2" href="{{ url('/dashboard') }}">Dashboard</a>
                         <a class="subLink_2" href="#">Refresh</a>
                         <a class="subLink_2" target="blank" href="https://thasinmahmud.com/open/contact/page">Meet Dev</a>
                         <a class="subLink_2" href="url('/tools')">Tools</a>
-                    </div>    
+                    </div>
                 </a>
             </div>
 
@@ -87,12 +87,12 @@
             </div>
 
         </div>
-    
+
         <div class="mainLinks">
             <a class="hamburger" href="#" id="ham" onclick="MobNavOpen()"><i class="fas fa-bars"></i></a>
             <a class="hamburger disNone" href="#" id="cross" onclick="MobNavClose()"><i class="fas fa-times"></i></a>
         </div>
-    
+
     </div>
 
     <!--CONTENT BODY-->
@@ -107,7 +107,7 @@
 
                 @if($package->package_type == 'folder')
 
-                <!--Folder template-->    
+                <!--Folder template-->
                 <div class="folderPack">
                     <a href="#" class="folder">
                         <i class="fas fa-folder"></i>
@@ -118,15 +118,17 @@
                         <a href="{{ url('/dashboard', $package->package_id) }}">Open Folder</a>
                         <i class="fas fa-folder-minus"></i>
                         <a href="{{ url('/delete', $package->package_id) }}">Delete Folder</a>
+                        <i class="fas fa-expand-arrows-alt"></i>
+                        <a href="{{ url('/session/set/move', $package->package_id) }}" onclick="MoveFileOpen()">Move Folder</a>
                         <i class="fas fa-lock"></i>
-                        <a href="{{ url('/session/set', $package->package_id) }}" onclick="LockFileOpen()">Lock Folder</a>
+                        <a href="{{ url('/session/set/lock', $package->package_id) }}" onclick="LockFileOpen()">Lock Folder</a>
                         <i class="fas fa-window-close"></i>
                         <a href="#" onclick="close_folder_option()">Close Menu</a>
                     </div>
                 </div>
 
                 @elseif($package->package_type == 'word')
-                
+
                 <!--Word file template-->
                 <div class="folderPack">
                     <a href="#" class="folder">
@@ -139,9 +141,9 @@
                         <i class="fas fa-minus-circle"></i>
                         <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
-                        <a href="#" onclick="MoveFileOpen()">Move File</a>
+                        <a href="{{ url('/session/set/move', $package->package_id) }}" onclick="MoveFileOpen()">Move File</a>
                         <i class="fas fa-lock"></i>
-                        <a href="{{ url('/session/set', $package->package_id) }}" onclick="LockFileOpen()">Lock File</a>
+                        <a href="{{ url('/session/set/lock', $package->package_id) }}" onclick="LockFileOpen()">Lock File</a>
                         <i class="fas fa-window-close"></i>
                         <a href="#" onclick="close_folder_option()">Close Menu</a>
                     </div>
@@ -161,9 +163,9 @@
                         <i class="fas fa-minus-circle"></i>
                         <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
-                        <a href="#" onclick="MoveFileOpen()">Move File</a>
+                        <a href="{{ url('/session/set/move', $package->package_id) }}" onclick="MoveFileOpen()">Move File</a>
                         <i class="fas fa-lock"></i>
-                        <a href="{{ url('/session/set', $package->package_id) }}" onclick="LockFileOpen()">Lock File</a>
+                        <a href="{{ url('/session/set/lock', $package->package_id) }}" onclick="LockFileOpen()">Lock File</a>
                         <i class="fas fa-window-close"></i>
                         <a href="#" onclick="close_folder_option()">Close Menu</a>
                     </div>
@@ -183,9 +185,9 @@
                         <i class="fas fa-minus-circle"></i>
                         <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
-                        <a href="#" onclick="MoveFileOpen()">Move File</a>
+                        <a href="{{ url('/session/set/move', $package->package_id) }}" onclick="MoveFileOpen()">Move File</a>
                         <i class="fas fa-lock"></i>
-                        <a href="{{ url('/session/set', $package->package_id) }}" onclick="LockFileOpen()">Lock File</a>
+                        <a href="{{ url('/session/set/lock', $package->package_id) }}" onclick="LockFileOpen()">Lock File</a>
                         <i class="fas fa-window-close"></i>
                         <a href="#" onclick="close_folder_option()">Close Menu</a>
                     </div>
@@ -205,9 +207,9 @@
                         <i class="fas fa-minus-circle"></i>
                         <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
-                        <a href="#" onclick="MoveFileOpen()">Move File</a>
+                        <a href="{{ url('/session/set/move', $package->package_id) }}" onclick="MoveFileOpen()">Move File</a>
                         <i class="fas fa-lock"></i>
-                        <a href="{{ url('/session/set', $package->package_id) }}" onclick="LockFileOpen()">Lock File</a>
+                        <a href="{{ url('/session/set/lock', $package->package_id) }}" onclick="LockFileOpen()">Lock File</a>
                         <i class="fas fa-window-close"></i>
                         <a href="#" onclick="close_folder_option()">Close Menu</a>
                     </div>
@@ -227,9 +229,9 @@
                         <i class="fas fa-minus-circle"></i>
                         <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
-                        <a href="#" onclick="MoveFileOpen()">Move File</a>
+                        <a href="{{ url('/session/set/move', $package->package_id) }}" onclick="MoveFileOpen()">Move File</a>
                         <i class="fas fa-lock"></i>
-                        <a href="{{ url('/session/set', $package->package_id) }}" onclick="LockFileOpen()">Lock File</a>
+                        <a href="{{ url('/session/set/lock', $package->package_id) }}" onclick="LockFileOpen()">Lock File</a>
                         <i class="fas fa-window-close"></i>
                         <a href="#" onclick="close_folder_option()">Close Menu</a>
                     </div>
@@ -249,9 +251,9 @@
                         <i class="fas fa-minus-circle"></i>
                         <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
-                        <a href="#" onclick="MoveFileOpen()">Move File</a>
+                        <a href="{{ url('/session/set/move', $package->package_id) }}" onclick="MoveFileOpen()">Move File</a>
                         <i class="fas fa-lock"></i>
-                        <a href="{{ url('/session/set', $package->package_id) }}" onclick="LockFileOpen()">Lock File</a>
+                        <a href="{{ url('/session/set/lock', $package->package_id) }}" onclick="LockFileOpen()">Lock File</a>
                         <i class="fas fa-window-close"></i>
                         <a href="#" onclick="close_folder_option()">Close Menu</a>
                     </div>
@@ -271,9 +273,9 @@
                         <i class="fas fa-minus-circle"></i>
                         <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
-                        <a href="#" onclick="MoveFileOpen()">Move File</a>
+                        <a href="{{ url('/session/set/move', $package->package_id) }}" onclick="MoveFileOpen()">Move File</a>
                         <i class="fas fa-lock"></i>
-                        <a href="{{ url('/session/set', $package->package_id) }}" onclick="LockFileOpen()">Lock File</a>
+                        <a href="{{ url('/session/set/lock', $package->package_id) }}" onclick="LockFileOpen()">Lock File</a>
                         <i class="fas fa-window-close"></i>
                         <a href="#" onclick="close_folder_option()">Close Menu</a>
                     </div>
@@ -293,9 +295,9 @@
                         <i class="fas fa-minus-circle"></i>
                         <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
-                        <a href="#" onclick="MoveFileOpen()">Move File</a>
+                        <a href="{{ url('/session/set/move', $package->package_id) }}" onclick="MoveFileOpen()">Move File</a>
                         <i class="fas fa-lock"></i>
-                        <a href="{{ url('/session/set', $package->package_id) }}" onclick="LockFileOpen()">Lock File</a>
+                        <a href="{{ url('/session/set/lock', $package->package_id) }}" onclick="LockFileOpen()">Lock File</a>
                         <i class="fas fa-window-close"></i>
                         <a href="#" onclick="close_folder_option()">Close Menu</a>
                     </div>
@@ -315,9 +317,9 @@
                         <i class="fas fa-minus-circle"></i>
                         <a href="{{ url('/delete', $package->package_id) }}">Delete Archive</a>
                         <i class="fas fa-expand-arrows-alt"></i>
-                        <a href="#" onclick="MoveFileOpen()">Move Archive</a>
+                        <a href="{{ url('/session/set/move', $package->package_id) }}" onclick="MoveFileOpen()">Move Archive</a>
                         <i class="fas fa-lock"></i>
-                        <a href="{{ url('/session/set', $package->package_id) }}" onclick="LockFileOpen()">Lock Archive</a>
+                        <a href="{{ url('/session/set/lock', $package->package_id) }}" onclick="LockFileOpen()">Lock Archive</a>
                         <i class="fas fa-window-close"></i>
                         <a href="#" onclick="close_folder_option()">Close Menu</a>
                     </div>
@@ -337,9 +339,9 @@
                         <i class="fas fa-minus-circle"></i>
                         <a href="{{ url('/delete', $package->package_id) }}">Delete File</a>
                         <i class="fas fa-expand-arrows-alt"></i>
-                        <a href="#" onclick="MoveFileOpen()">Move File</a>
+                        <a href="{{ url('/session/set/move', $package->package_id) }}" onclick="MoveFileOpen()">Move File</a>
                         <i class="fas fa-lock"></i>
-                        <a href="{{ url('/session/set', $package->package_id) }}" onclick="LockFileOpen()">Lock File</a>
+                        <a href="{{ url('/session/set/lock', $package->package_id) }}" onclick="LockFileOpen()">Lock File</a>
                         <i class="fas fa-window-close"></i>
                         <a href="#" onclick="close_folder_option()">Close Menu</a>
                     </div>
@@ -349,7 +351,7 @@
 
             @else
 
-                <!--Locked template-->    
+                <!--Locked template-->
                 <div class="folderPack">
                     <a href="#" class="folder">
                         <i class="fas fa-shield-alt"></i>
@@ -357,7 +359,7 @@
                     </a>
                     <div class="option_menu">
                         <i class="fas fa-unlock"></i>
-                        <a href="{{ url('/session/set', $package->package_id) }}" onclick="LockFileOpen()">Unlock Folder</a>
+                        <a href="{{ url('/session/set/lock', $package->package_id) }}" onclick="LockFileOpen()">Unlock Folder</a>
                         <i class="fas fa-window-close"></i>
                         <a href="#" onclick="close_folder_option()">Close Menu</a>
                     </div>
@@ -382,11 +384,14 @@
         <div class="modals_container" id="popupR">
 
             <div class="bgwhite modals modalRight">
-            
-                <i class="fa-solid fa-folder-plus"></i> 
+
+                <i class="fa-solid fa-folder-plus"></i>
                 <a href="#" onclick="fileFolderAdderOpen()">Add Folder</a>
 
-                <i class="fas fa-sync-alt"></i> 
+                <i class="fas fa-folder"></i>
+                <a href="{{ url('/dashboard') }}">Dashboard</a>
+
+                <i class="fas fa-sync-alt"></i>
                 <a href="#">Refresh</a>
 
                 <i class="fas fa-eye"></i>
@@ -404,12 +409,15 @@
                 <i class="fas fa-tools"></i>
                 <a href="tools.html">Tools</a>
 
+                <i class="fas fa-arrow-left"></i>
+                <a href="{{ url('/go/back') }}">Go Back</a>
+
                 <i class="fas fa-window-close"></i>
                 <a href="#" onclick="closeMenu()">Close Menu</a>
 
                 <i class="fa-solid fa-right-from-bracket"></i>
                 <a href="{{ url('/logout') }}">Logout</a>
-        
+
             </div>
 
         </div>
@@ -420,10 +428,13 @@
 
             <div class="bgwhite mobnav modalRight">
 
-                <i class="fa-solid fa-folder-plus"></i> 
+                <i class="fa-solid fa-folder-plus"></i>
                 <a href="#" onclick="fileFolderAdderOpen()">Add Folder</a>
 
-                <i class="fas fa-sync-alt"></i> 
+                <i class="fas fa-folder"></i>
+                <a href="{{ url('/dashboard') }}">Dashboard</a>
+
+                <i class="fas fa-sync-alt"></i>
                 <a href="#">Refresh</a>
 
                 <i class="fas fa-eye"></i>
@@ -441,12 +452,15 @@
                 <i class="fas fa-tools"></i>
                 <a href="tools.html">Tools</a>
 
+                <i class="fas fa-arrow-left"></i>
+                <a href="{{ url('/go/back') }}">Go Back</a>
+
                 <i class="fas fa-window-close"></i>
                 <a href="#" onclick="MobNavClose()">Close Menu</a>
 
                 <i class="fa-solid fa-right-from-bracket"></i>
                 <a href="{{ url('/logout') }}">Logout</a>
-        
+
             </div>
 
         </div>
@@ -463,26 +477,26 @@
             <!--Create Folder File Form-->
             <form action="{{ url('addPackage') }}" method="post" class="formBoxContainer" enctype="multipart/form-data">
             @csrf
-                    
-                <div class="frmElm_10 formBox">                   
+
+                <div class="frmElm_10 formBox">
                     <label for="name"> Name </label>
-                    <input name="name" type="text" required>                    
+                    <input name="name" type="text" required>
                 </div>
 
                 <div class="formBox">
                     <div><b>Open</b></div>
-                    <div class="select_1">              
+                    <div class="select_1">
                         <select name="open_as" id="open_as" required>
                             <option value="folder">Folder</option>
                             <option value="file">File</option>
-                        </select>                   
-                        <span></span> <!--Important-->                  
+                        </select>
+                        <span></span> <!--Important-->
                     </div>
                 </div>
 
                 <div class="formBox">
                     <div><b>File Type</b></div>
-                    <div class="select_1">              
+                    <div class="select_1">
                         <select name="file_type" id="file_type" required>
                             <option value="folder">Folder</option>
                             <option value="word">Word/Text</option>
@@ -495,8 +509,8 @@
                             <option value="video">Video</option>
                             <option value="archive">Archive</option>
                             <option value="miscellaneous">Miscellaneous</option>
-                        </select>                   
-                        <span></span> <!--Important-->                  
+                        </select>
+                        <span></span> <!--Important-->
                     </div>
                 </div>
 
@@ -512,183 +526,171 @@
 
         </div>
 
-        <!---Move File--->
 
-        <div class="contentBox disNone" id="MoveFile">
+        @if(Session::get('REASON') == "moving")
 
-            <div class="titleBox">
-                <h3>Move File:</h3>
-                <a href="#" onclick="MoveFileClose()"><i class="fas fa-times"></i></a>
-            </div>
+            <!---Move File--->
 
-            <!--Folder Container-->
-            <div class="folderContainerList modalRecycle">
-                
-                <!--Folder template-->
-               <div class="folderPack">
-                   <a href="#" class="folder">
-                       <i class="fas fa-folder"></i>
-                       <span class="folderName">Folder Name</span>
-                   </a>
-                   <div class="option_menu">
-                       <i class="fas fa-clone"></i>
-                       <a href="#">Move Here</a>
-                       <i class="fas fa-window-close"></i>
-                       <a href="#" onclick="close_folder_option()">Close Menu</a>
-                   </div>
-               </div>
-               
-               <!--Folder template-->
-               <div class="folderPack">
-                    <a href="#" class="folder">
-                        <i class="fas fa-folder"></i>
-                        <span class="folderName">Folder Name</span>
-                    </a>
-                    <div class="option_menu">
-                        <i class="fas fa-clone"></i>
-                        <a href="#">Move Here</a>
-                        <i class="fas fa-window-close"></i>
-                        <a href="#" onclick="close_folder_option()">Close Menu</a>
-                    </div>
-                </div>
+            @if(!empty(Session::get('IDPASSER')))
 
-                <!--Folder template-->
-                <div class="folderPack">
-                    <a href="#" class="folder">
-                        <i class="fas fa-folder"></i>
-                        <span class="folderName">Folder Name</span>
-                    </a>
-                    <div class="option_menu">
-                        <i class="fas fa-clone"></i>
-                        <a href="#">Move Here</a>
-                        <i class="fas fa-window-close"></i>
-                        <a href="#" onclick="close_folder_option()">Close Menu</a>
-                    </div>
-                </div>
-
-                <!--Folder template-->
-               <div class="folderPack">
-                    <a href="#" class="folder">
-                        <i class="fas fa-folder"></i>
-                        <span class="folderName">Folder Name</span>
-                    </a>
-                    <div class="option_menu">
-                        <i class="fas fa-clone"></i>
-                        <a href="#">Move Here</a>
-                        <i class="fas fa-window-close"></i>
-                        <a href="#" onclick="close_folder_option()">Close Menu</a>
-                    </div>
-                </div>
-
-                <!--Folder template-->
-                <div class="folderPack">
-                    <a href="#" class="folder">
-                        <i class="fas fa-folder"></i>
-                        <span class="folderName">Folder Name</span>
-                    </a>
-                    <div class="option_menu">
-                        <i class="fas fa-clone"></i>
-                        <a href="#">Move Here</a>
-                        <i class="fas fa-window-close"></i>
-                        <a href="#" onclick="close_folder_option()">Close Menu</a>
-                    </div>
-                </div>
-   
-           </div>
-
-        </div>
-
-        <!--Lock File -->
-
-        @if(!empty(Session::get('IDPASSER')))
-
-            @if(Session::get('STATUSPASSER') == 'unlocked')
-
-            <div class="contentBox disGrid" id="LockFile">
+            <div class="contentBox disGrid" id="MoveFile">
 
                 <div class="titleBox">
-                    <h3>Lock: {{Session::get('NAMEPASSER')}}</h3>
-                    <a href="{{ url('/session/delete') }}" onclick="LockFileClose()"><i class="fas fa-times"></i></a>
+                    <h3>Move {{Session::get('NAMEPASSER')}}:</h3>
+                    <a href="{{ url('/session/delete') }}" onclick="MoveFileClose()"><i class="fas fa-times"></i></a>
                 </div>
 
-                <form action="{{ url('/lock/file', ['IDPASSER' => session('IDPASSER')]) }}" method="post" class="formBoxContainer">
-                @csrf
-                        
-                    <div class="frmElm_10 formBox">                   
-                        <label  for=""> Password </label>
-                        <input  type="password" name="code" required>                    
-                    </div>
-                        
-                    <div class="frmElm_10 formBox">                   
-                        <label  for=""> Confirm Password </label>
-                        <input  type="password" name="confirmCode" required>                    
+                <!--Folder Container-->
+                <div class="folderContainerList modalRecycle">
+
+                    <!--Folder template (for Root)-->
+                    <div class="folderPack">
+                        <a href="#" class="folder">
+                            <i class="fas fa-folder"></i>
+                            <span class="folderName">Root Folder.</span>
+                        </a>
+                        <div class="option_menu">
+                            <i class="fas fa-clone"></i>
+                            <a href="{{ url('/make/mother', 'ROOT') }}">Move Here</a>
+                            <i class="fas fa-window-close"></i>
+                            <a href="#" onclick="close_folder_option()">Close Menu</a>
+                        </div>
                     </div>
 
-                    <input class="frmBtnR" value="Lock File" type="submit">
+                    @foreach($folders as $folder)
 
-                </form>
+                    @if($folder->package_status == 'unlocked' && Session::get('IDPASSER') != $folder->package_id)
+
+                    <!--Folder template-->
+                    <div class="folderPack">
+                        <a href="#" class="folder">
+                            <i class="fas fa-folder"></i>
+                            <span class="folderName">{{$folder->package_name}}</span>
+                        </a>
+                        <div class="option_menu">
+                            <i class="fas fa-clone"></i>
+                            <a href="{{ url('/make/mother', $folder->package_id) }}">Move Here</a>
+                            <i class="fas fa-window-close"></i>
+                            <a href="#" onclick="close_folder_option()">Close Menu</a>
+                        </div>
+                    </div>
+
+                    @endif
+
+                    @endforeach
+
+                </div>
+
             </div>
 
             @else
 
-            <div class="contentBox disGrid" id="LockFile">
+            <div class="contentBox disNone" id="MoveFile">
 
                 <div class="titleBox">
-                    <h3>Unlock: {{Session::get('NAMEPASSER')}}</h3>
-                    <a href="{{ url('/session/delete') }}" onclick="LockFileClose()"><i class="fas fa-times"></i></a>
+                    <h3>Processing Request...</h3>
+                    <a href="#" onclick="MoveFileClose()"><i class="fas fa-times"></i></a>
                 </div>
 
-                <form action="{{ url('/unlock/file', ['IDPASSER' => session('IDPASSER')]) }}" method="post" class="formBoxContainer">
-                @csrf
-                        
-                    <div class="frmElm_10 formBox">                   
-                        <label  for=""> Password </label>
-                        <input  type="password" name="code" required>                    
-                    </div>
-                        
-                    <div class="frmElm_10 formBox">                   
-                        <label  for=""> Confirm Password </label>
-                        <input  type="password" name="confirmCode" required>                    
+                <!--Folder Container-->
+                <div class="folderContainerList modalRecycle">
+
+                </div>
+
+            </div>
+
+            @endif
+
+        @elseif(Session::get('REASON') == "locking")
+
+            <!--Lock File -->
+
+            @if(!empty(Session::get('IDPASSER')))
+
+                <div class="contentBox disGrid" id="LockFile">
+
+                    @if(Session::get('STATUSPASSER') == 'unlocked')
+
+                    <div class="titleBox">
+                        <h3>Lock: {{Session::get('NAMEPASSER')}}</h3>
+                        <a href="{{ url('/session/delete') }}" onclick="LockFileClose()"><i class="fas fa-times"></i></a>
                     </div>
 
-                    <input class="frmBtnR" value="Lock File" type="submit">
+                    <form action="{{ url('/lock/file', ['IDPASSER' => session('IDPASSER')]) }}" method="post" class="formBoxContainer">
+                    @csrf
+
+                        <div class="frmElm_10 formBox">
+                            <label  for=""> Password </label>
+                            <input  type="password" name="code" required>
+                        </div>
+
+                        <div class="frmElm_10 formBox">
+                            <label  for=""> Confirm Password </label>
+                            <input  type="password" name="confirmCode" required>
+                        </div>
+
+                        <input class="frmBtnR" value="Lock File" type="submit">
+
+                    </form>
+
+                    @else
+
+                    <div class="titleBox">
+                        <h3>Unlock: {{Session::get('NAMEPASSER')}}</h3>
+                        <a href="{{ url('/session/delete') }}" onclick="LockFileClose()"><i class="fas fa-times"></i></a>
+                    </div>
+
+                    <form action="{{ url('/unlock/file', ['IDPASSER' => session('IDPASSER')]) }}" method="post" class="formBoxContainer">
+                    @csrf
+
+                        <div class="frmElm_10 formBox">
+                            <label  for=""> Password </label>
+                            <input  type="password" name="code" required>
+                        </div>
+
+                        <div class="frmElm_10 formBox">
+                            <label  for=""> Confirm Password </label>
+                            <input  type="password" name="confirmCode" required>
+                        </div>
+
+                        <input class="frmBtnR" value="Lock File" type="submit">
+
+                    </form>
+
+                    @endif
+
+                </div>
+
+            @else
+
+            <div class="contentBox disNone" id="LockFile">
+
+                <div class="titleBox">
+                    <h3>Processing Request...</h3>
+                    <a href="#" onclick="LockFileClose()"><i class="fas fa-times"></i></a>
+                </div>
+
+                <form action="" class="formBoxContainer">
+                @csrf
+
+                    <div class="frmElm_10 formBox">
+                        <label  for=""> Password </label>
+                        <input  type="password" name="code" class="shadeLight" disable>
+                    </div>
+
+                    <div class="frmElm_10 formBox">
+                        <label  for=""> Confirm Password </label>
+                        <input  type="password" name="confirmCode" class="shadeLight" disable>
+                    </div>
+
+                    <input class="frmBtnR" value="Lock File" type="button">
 
                 </form>
             </div>
 
             @endif
 
-        @else
-
-        <div class="contentBox disNone" id="LockFile">
-
-            <div class="titleBox">
-                <h3>Processing Request...</h3>
-                <a href="{{ url('/session/delete') }}" onclick="LockFileClose()"><i class="fas fa-times"></i></a>
-            </div>
-
-            <form action="" class="formBoxContainer">
-            @csrf
-                    
-                <div class="frmElm_10 formBox">                   
-                    <label  for=""> Password </label>
-                    <input  type="password" name="code" class="shadeLight" disable>                    
-                </div>
-                    
-                <div class="frmElm_10 formBox">                   
-                    <label  for=""> Confirm Password </label>
-                    <input  type="password" name="confirmCode" class="shadeLight" disable>                    
-                </div>
-
-                <input class="frmBtnR" value="Lock File" type="button">
-
-            </form>
-        </div>
-
         @endif
-
-
-
 
 
 
