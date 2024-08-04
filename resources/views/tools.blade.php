@@ -23,12 +23,17 @@
     <!-- CDN Production (current version)-->
     <link rel="stylesheet" href="https://rawcdn.githack.com/Thasinmahmudbd/TcSS-Framework/8272c261b90f1bd691ade6402fa9f73ada36fa12/dist/css/tcss.min.css">
     <!-- Custom Style-->
+    <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/tcss.min.css')}}">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css')}}">
     <link rel="stylesheet" href="{{ asset('css/tools.css')}}">
 
     <!-- Script -->
     <script defer src="{{ asset('js/contextMenu.js')}}"></script>
     <script defer src="{{ asset('js/tools.js')}}"></script>
+
+    <!--Jquery (AJAX)-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 
 <body class="nunito">
@@ -245,13 +250,13 @@
             </div>
 
             <!-- Search Form. -->
-            <form class="searchBar intensSearch" action="#">
-                <input class="searchField" type="text" placeholder="Type in file name to search">
-                <button class="searchBtn" type="input"><i class="fas fa-search"></i></button>
+            <form class="intensSearch frmElm_5" action="#">
+                <input class="searchField autoSearch" type="text" placeholder="Type in file name to search" name="package_name" id="package_name">
+                <!--<button class="searchBtn" type="input"><i class="fas fa-search"></i></button>-->
             </form>
 
             <!--Folder Container-->
-            <div class="folderContainerList modalRecycle">
+            <div class="folderContainerList modalRecycle" id="folderCont">
 
             @foreach($packages as $package)
 
@@ -584,6 +589,28 @@
         </div>
 
     </div>
+
+
+
+
+    <!--Auto search using AJAX-->
+    <script>
+
+    $(document).ready(function(){
+        $("#package_name").on('keyup', function(){
+            var value = $(this).val();
+            $.ajax({
+                url:"{{ route('searchBin') }}",
+                type:"GET",
+                data:{'package_name':value},
+                success:function(data){
+                    $("#folderCont").html(data);
+                }
+            });
+        });
+    });
+
+    </script>
 
 
 </body>

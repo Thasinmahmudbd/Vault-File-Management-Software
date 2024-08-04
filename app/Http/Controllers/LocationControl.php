@@ -572,7 +572,7 @@ class LocationControl extends Controller
     ##############################################
     public function tools(Request $request, location $location)
     {
-        //Getting all packages based no location.
+        //Getting all packages based no package status.
         $USERTYPE = $request->session()->get('USERTYPE');
         $USERID = $request->session()->get('USERID');
 
@@ -611,5 +611,77 @@ class LocationControl extends Controller
         $request->session()->put('NOTE',$dash->package_name.' - Restored to dashboard.');
 
         return redirect('/dash');
+    }
+
+
+    ##############################################
+     # Auto search recycle bin.
+    ##############################################
+    public function searchRecycle(Request $request, location $location)
+    {
+        //Getting all packages based no search.
+        $USERTYPE = $request->session()->get('USERTYPE');
+        $USERID = $request->session()->get('USERID');
+
+        if($request->ajax()){
+            $packages = location::query()
+                ->where('package_status','removed')
+                ->where('user_id',$USERID)
+                ->where('package_name','LIKE','%'.$request->package_name.'%')
+                ->orderBy('package_type','asc')
+                ->get();
+
+            $output = '';
+
+            if(count($packages) >0){
+                foreach($packages as $package){
+                    $output .='<div class="folderPack">';
+                        $output .='<div class="folder bin">';
+                        if($package->package_type == 'folder'){
+                            $output .='<i class="fas fa-folder"></i>';
+                        }
+                        if($package->package_type == 'word'){
+                            $output .='<i class="fas fa-file-word"></i>';
+                        }
+                        if($package->package_type == 'powerpoint'){
+                            $output .='<i class="fas fa-file-powerpoint"></i>';
+                        }
+                        if($package->package_type == 'pdf'){
+                            $output .='<i class="fas fa-file-pdf"></i>';
+                        }
+                        if($package->package_type == 'excel'){
+                            $output .='<i class="fas fa-file-excel"></i>';
+                        }
+                        if($package->package_type == 'code'){
+                            $output .='<i class="fas fa-code"></i>';
+                        }
+                        if($package->package_type == 'image'){
+                            $output .='<i class="fas fa-image"></i>';
+                        }
+                        if($package->package_type == 'audio'){
+                            $output .='<i class="fas fa-compact-disc"></i>';
+                        }
+                        if($package->package_type == 'video'){
+                            $output .='<i class="fas fa-film"></i>';
+                        }
+                        if($package->package_type == 'archive'){
+                            $output .='<i class="fas fa-archive"></i>';
+                        }
+                        if($package->package_type == 'miscellaneous'){
+                            $output .='<i class="fas fa-question-circle"></i>';
+                        }
+                            $output .='<span class="folderName">'.$package->package_name.'</span>';
+                            $output .= '<a href="' . url('/restore/' . $package->package_id) . '"><i class="fas fa-trash-restore-alt"></i></a>';
+                            $output .= '<a href="' . url('/delete/' . $package->package_id) . '"><i class="fas fa-minus-circle"></i></a>';
+                        $output .='</div>';
+                    $output .='</div>';
+                }
+            }
+            else{
+                $output .='';
+            }
+            return $output;
+        }
+        return redirect('/tools');
     }
 }

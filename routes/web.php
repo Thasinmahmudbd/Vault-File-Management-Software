@@ -72,6 +72,9 @@ Route::middleware('sessionValidation')->group(function(){
         //go to tools.
         Route::get('/tools','tools');
 
+        //search recycle bin.
+        Route::get('/search/recycle','searchRecycle')->name('searchBin');
+
     });
 });
 

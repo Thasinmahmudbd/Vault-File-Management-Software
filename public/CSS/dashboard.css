@@ -72,7 +72,7 @@
 }
 
 .folderContainer .folder .folderName{
-    text-overflow: ellipsis; 
+    text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     max-height: 40px;
@@ -111,6 +111,19 @@
     padding-bottom: 5px;
 }
 
+.folderContainerList .bin{
+    display: grid;
+    grid-template-columns: 70px 1fr 50px 50px;
+    gap: 0px;
+    font-size: .8rem;
+    font-weight: bold;
+    align-items: center;
+    text-decoration: none;
+    color: #000;
+    border-bottom: 1px dotted gold;
+    padding-bottom: 5px;
+}
+
 .folderContainerList .folder .folderName{
     text-overflow: unset;
     white-space: wrap;
@@ -137,6 +150,9 @@
 .folderContainerList .folder .fa-question-circle{color: rgb(106, 108, 110);}
 .folderContainerList .folder .fa-archive{color: rgb(46, 167, 146);}
 .folderContainer .folder .fa-shield-alt{color: rgb(175, 42, 42);}
+
+.folderContainerList .bin .fa-trash-restore-alt{color: rgb(17, 165, 27);}
+.folderContainerList .bin .fa-minus-circle{color: rgb(175, 42, 42);}
 
 .modals_container{
     display: none;

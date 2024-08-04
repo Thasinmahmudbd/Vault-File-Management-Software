@@ -23,8 +23,10 @@
     <!-- CDN Production (current version)-->
     <link rel="stylesheet" href="https://rawcdn.githack.com/Thasinmahmudbd/TcSS-Framework/8272c261b90f1bd691ade6402fa9f73ada36fa12/dist/css/tcss.min.css">
     <!-- Custom Style-->
+    <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/tcss.min.css')}}">
     <link rel="stylesheet" href="{{ asset('css/style.css')}}">
-    
+
     <!-- Script -->
     <script defer src="{{ asset('js/script.js')}}"></script>
     <script defer src="{{ asset('js/blockBackButton.js')}}"></script>
@@ -56,20 +58,20 @@
             <form action="{{ url('checkCode') }}" method="post">
             @csrf
                     <div class="frmElm_14">
-                
+
                         <label  for=""> Handel: </label>
                         <input  type="text" class="blockSelect" placeholder="Enter a valid email" name="handel" value="{{old('handel')}}">
-                
+
                     </div>
                     @error('handel') {{$message}} @enderror
 
                     <div class="gap"></div>
 
                     <div class="frmElm_14">
-                
+
                         <label  for=""> Pass Code: </label>
                         <input  type="password" class="blockSelect" placeholder="Enter your pass code" name="code">
-                
+
                     </div>
                     @error('code') {{$message}} @enderror
 
@@ -77,7 +79,7 @@
 
                     <input class="successBtn w_100Per p_5px" value="Login" type="submit">
             </form>
-            
+
             <div class="button_tab bgGold modalFooter">
                 <p class="nunitoBold">You can also visit</p>
                 <a class="link clrBlack" href="#" onclick="modal2_Open()"><abbr title="Click for help">Help</abbr></a>
@@ -93,7 +95,7 @@
                 <p class="nunitoBold">Enter Vault</p>
                 <a href="#" class="titleBtn" onclick="modals_Close()">&times;</a>
             </div>
-            
+
             <ul>
                 <li class="listIn listDecFrom_0">Lorem, ipsum dolor sit amet</li>
                 <div class="gap"></div>
@@ -102,7 +104,7 @@
                 <li class="listIn listDecFrom_0">Lorem, ipsum dolor sit amet</li>
                 <li class="link curPointer">Apply for an account.</li>
             </ul>
-            
+
             <div class="button_tab bgGold modalFooter">
                 <p class="nunitoBold">You can also visit</p>
                 <a class="link clrBlack" href="#" onclick="modal1_Open()"><abbr title="Log in vault">Vault</abbr></a>
